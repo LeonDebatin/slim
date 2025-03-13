@@ -609,3 +609,5 @@ class SLIM_GSGP:
                     end - start,
                     self.elite.nodes_count,
                 )
+        #self.population = population
+    
