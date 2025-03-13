@@ -270,7 +270,7 @@ def gsgp(X_train: torch.Tensor, y_train: torch.Tensor, X_test: torch.Tensor = No
                        settings_dict],
         unique_run_id=unique_run_id,
     )
-    return optimizer.elite
+    return optimizer.elite#, optimizer.population
 
 
 if __name__ == "__main__":

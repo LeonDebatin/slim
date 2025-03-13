@@ -42,6 +42,9 @@ def rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     torch.Tensor
         RMSE value.
     """
+    
+    y_pred = torch.sigmoid(y_pred)
+    
     return torch.sqrt(torch.mean(torch.square(torch.sub(y_true, y_pred)), dim=len(y_pred.shape) - 1))
 
 
@@ -119,3 +122,57 @@ def signed_errors(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
         Signed error values.
     """
     return torch.sub(y_true, y_pred)
+
+
+
+#binary classification fitness functions
+
+def sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute Root Mean Squared Error (RMSE) after applying sigmoid function to the predictions.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        RMSE value.
+    """
+    
+    y_pred = torch.sigmoid(y_pred)
+    return torch.sqrt(torch.mean(torch.square(torch.sub(y_true, y_pred)), dim=len(y_pred.shape) - 1))
+
+def f1_score(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute F1 score.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        F1 score value.
+    """
+    y_pred = torch.round(torch.sigmoid(y_pred))  # Convert logits to binary predictions
+
+    tp = torch.sum(y_true * y_pred).float()
+    fp = torch.sum((1 - y_true) * y_pred).float()
+    fn = torch.sum(y_true * (1 - y_pred)).float()
+
+    # Avoid division by zero by checking conditions
+    precision = tp / (tp + fp + 1e-8) if (tp + fp) > 0 else torch.tensor(0.0)
+    recall = tp / (tp + fn + 1e-8) if (tp + fn) > 0 else torch.tensor(0.0)
+    
+    return 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else torch.tensor(0.0)
+
+
