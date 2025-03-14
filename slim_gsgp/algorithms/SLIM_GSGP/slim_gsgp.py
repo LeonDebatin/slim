@@ -337,6 +337,16 @@ class SLIM_GSGP:
 
         # begining the evolution process
         for it in range(1, n_iter + 1, 1):
+            ########################################
+            
+            
+            self.p_deflate = 1-((n_iter - it) / n_iter)
+            
+            
+            
+            ###############
+            
+            
             # starting an empty offspring population
             offs_pop, start = [], time.time()
 
@@ -609,5 +619,4 @@ class SLIM_GSGP:
                     end - start,
                     self.elite.nodes_count,
                 )
-        #self.population = population
     
