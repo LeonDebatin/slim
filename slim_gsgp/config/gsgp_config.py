@@ -91,7 +91,8 @@ fitness_function_options = {
     "mae_int": mae_int,
     "signed_errors": signed_errors,
     'sigmoid_rmse': sigmoid_rmse,
-    'f1_score': f1_score
+    'f1_score': f1_score,
+    'accuracy': accuracy
 }
 
 initializer_options = {

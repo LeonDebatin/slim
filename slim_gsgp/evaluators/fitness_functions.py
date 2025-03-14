@@ -163,11 +163,9 @@ def f1_score(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     torch.Tensor
         F1 score value.
     """
-    y_pred = torch.round(torch.sigmoid(y_pred))  # Convert logits to binary predictions
+    y_pred = (y_pred > 0).float()  # Convert logits to binary predictions
 
-    tp = torch.sum(y_true * y_pred).float()
-    fp = torch.sum((1 - y_true) * y_pred).float()
-    fn = torch.sum(y_true * (1 - y_pred)).float()
+    tp, tn, fp, fn = get_tp_tn_fp_fn(y_true, y_pred)
 
     # Avoid division by zero by checking conditions
     precision = tp / (tp + fp + 1e-8) if (tp + fp) > 0 else torch.tensor(0.0)
@@ -176,3 +174,53 @@ def f1_score(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     return 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else torch.tensor(0.0)
 
 
+
+def accuracy(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute accuracy.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        Accuracy value.
+    """
+    y_pred = (y_pred > 0).float()  # Convert logits to binary predictions
+
+    tp, tn, fp, fn = get_tp_tn_fp_fn(y_true, y_pred)
+
+    return (tp + tn) / (tp + tn + fp + fn)
+
+
+
+
+def get_tp_tn_fp_fn(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute True Positives, True Negatives, False Positives and False Negatives.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        True Positives, True Negatives, False Positives and False Negatives.
+    """
+    y_pred = (y_pred > 0).float()  # Convert logits to binary predictions
+
+    tp = torch.sum(y_true * y_pred).float()
+    tn = torch.sum((1 - y_true) * (1 - y_pred)).float()
+    fp = torch.sum((1 - y_true) * y_pred).float()
+    fn = torch.sum(y_true * (1 - y_pred)).float()
+
+    return tp, tn, fp, fn
