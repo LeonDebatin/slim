@@ -235,6 +235,8 @@ def roc_auc(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
         ROC-AUC score value.
     """
     # Sort predictions and corresponding true labels
+    y_pred = torch.sigmoid(y_pred)
+    
     sorted_indices = torch.argsort(y_pred, descending=True)
     y_true_sorted = y_true[sorted_indices]
     
