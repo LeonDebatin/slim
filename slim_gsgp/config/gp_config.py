@@ -89,7 +89,8 @@ fitness_function_options = {
     "signed_errors": signed_errors,
     'sigmoid_rmse': sigmoid_rmse,
     'f1_score': f1_score,
-    'accuracy': accuracy
+    'accuracy': accuracy,
+    'roc_auc': roc_auc
 }
 
 initializer_options = {

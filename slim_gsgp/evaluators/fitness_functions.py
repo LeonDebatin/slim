@@ -127,6 +127,7 @@ def signed_errors(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
 
 #binary classification fitness functions
 
+
 def sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     """
     Compute Root Mean Squared Error (RMSE) after applying sigmoid function to the predictions.
@@ -163,15 +164,96 @@ def f1_score(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     torch.Tensor
         F1 score value.
     """
+
+    prec = precision(y_true, y_pred)
+    rec = recall(y_true, y_pred)
+    
+    return 2 * prec * rec / (prec + rec) if (prec + rec) > 0 else torch.tensor(0.0)
+
+
+
+def precision(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute precision.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        Precision value.
+    """
     y_pred = (y_pred > 0).float()  # Convert logits to binary predictions
 
-    tp, tn, fp, fn = get_tp_tn_fp_fn(y_true, y_pred)
+    tp, _, fp, _ = get_tp_tn_fp_fn(y_true, y_pred)
 
-    # Avoid division by zero by checking conditions
-    precision = tp / (tp + fp + 1e-8) if (tp + fp) > 0 else torch.tensor(0.0)
-    recall = tp / (tp + fn + 1e-8) if (tp + fn) > 0 else torch.tensor(0.0)
+    return tp / (tp + fp + 1e-8)
+
+
+def recall(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute recall.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        Recall value.
+    """
+    y_pred = (y_pred > 0).float()  # Convert logits to binary predictions
+
+    tp, _, _, fn = get_tp_tn_fp_fn(y_true, y_pred)
+
+    return tp / (tp + fn + 1e-8)
+
+
+def roc_auc(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute ROC-AUC score without external libraries.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values (logits or probabilities, not binary labels).
+
+    Returns
+    -------
+    torch.Tensor
+        ROC-AUC score value.
+    """
+    # Sort predictions and corresponding true labels
+    sorted_indices = torch.argsort(y_pred, descending=True)
+    y_true_sorted = y_true[sorted_indices]
     
-    return 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else torch.tensor(0.0)
+    # Compute ranks
+    pos_count = torch.sum(y_true).float()
+    neg_count = (y_true.shape[0] - pos_count).float()
+    
+    # Handle edge cases where there are no positive or negative samples
+    if pos_count == 0 or neg_count == 0:
+        return torch.tensor(0.5)  # AUC is undefined, return 0.5 (random classifier)
+    
+    # Compute True Positive Rate (TPR) and False Positive Rate (FPR)
+    tpr = torch.cumsum(y_true_sorted, dim=0) / pos_count
+    fpr = torch.cumsum(1 - y_true_sorted, dim=0) / neg_count
+    
+    # Compute AUC using the trapezoidal rule
+    auc = torch.trapz(tpr, fpr) if tpr.numel() > 1 else torch.tensor(0.5)
+    return auc
+
 
 
 
