@@ -289,7 +289,7 @@ def slim(X_train: torch.Tensor, y_train: torch.Tensor, X_test: torch.Tensor = No
     )
 
     log_settings(
-        path=os.path.join(os.getcwd(), "log", "slim_settings.csv"),
+        path=log_path[:-4] + "_settings.csv",
         settings_dict=[slim_gsgp_solve_parameters,
                        slim_gsgp_parameters,
                        slim_gsgp_pi_init,

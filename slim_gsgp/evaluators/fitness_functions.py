@@ -283,6 +283,36 @@ def accuracy(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
 
 
 
+def mixed_metric(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute a mixed metric combining accuracy, F1 score and ROC.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True values.
+    y_pred : torch.Tensor
+        Predicted values.
+
+    Returns
+    -------
+    torch.Tensor
+        Mixed metric value.
+    """
+    acc = accuracy(y_true, y_pred)
+    f1 = f1_score(y_true, y_pred)
+    roc = roc_auc(y_true, y_pred)
+    minmax_roc_auc = 2 * (roc -0.5)
+
+    return 1 / 3 * (acc + f1 + minmax_roc_auc)
+
+
+
+
+
+
+
+
 
 def get_tp_tn_fp_fn(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     """
