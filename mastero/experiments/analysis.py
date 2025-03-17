@@ -1,6 +1,8 @@
 import pandas as pd
 import ast
 import os
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 
@@ -61,6 +63,12 @@ def get_all_results(experiment):
     # Concatenate all results at once (Faster than appending in a loop)
     results = pd.concat(results_list, ignore_index=True)
     
+    if 'config.slim_version' in results.columns:
+        results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
+
+    results['name'] = results['name'].str.upper()
+    
+    
     return results
 
 
@@ -81,6 +89,23 @@ def get_average_ranking(results, metric):
     average_ranking = results.groupby('config_id')['rank'].mean().sort_values()
     
     return average_ranking
+
+
+def get_rankings(results, metric):
+    results_avg = results.groupby(["dataset_name", "config_id"], as_index=False)[metric].mean()
+
+    # Rank the averaged scores within each dataset (higher is better)
+    results_avg["rank"] = results_avg.groupby("dataset_name")[metric].rank(ascending=False, method="min")
+
+    # Merge back with original data to maintain all columns
+    results = results.merge(results_avg[["dataset_name", "config_id", "rank"]], on=["dataset_name", "config_id"], how="left")
+
+    return results
+
+
+
+
+
 
 def get_log(experiment, dataset_name, config_id, add_columns = True):
     log = pd.read_csv(f"../../data/results/{experiment}/{dataset_name}/log_config_id_{config_id}.csv")
@@ -112,9 +137,53 @@ def get_all_logs(experiment):
     logs.columns = ['algorithm', 'id', 'dataset', 'seed', 'generation', 'elite_train_error', 'time', 'population_nodes', 'elite_test_error', 'elite_nodes', 'log_level', 'config_id']
     
     logs.drop(columns=['id'], inplace=True)
+    logs.loc[logs['algorithm'] == 'StandardGP', 'algorithm'] = 'GP'
+    logs.loc[logs['algorithm'] == 'StandardGSGP', 'algorithm'] = 'GSGP'
     #last to first column
     logs.sort_values(by=['dataset', 'config_id', 'seed', 'generation'], inplace=True)
     cols = logs.columns.tolist()
     logs = logs[[cols[-1]] + cols[:-1]]
-    return logs
+    logs
     
+    return logs
+
+def plot_value_by_generations(logs, value, dataset_name, ax):
+    """Plots value over generations for a specific dataset on a given subplot axis."""
+    # Group and calculate median
+    grp = logs.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[[value]].median().reset_index()
+    
+    # Plot using seaborn on the given subplot axis
+    sns.lineplot(data=grp.loc[grp['dataset'] == dataset_name], x='generation', y=value, hue='algorithm', ax=ax)
+    
+    # Set labels and title
+    ax.set_title(f'{value} by Generation\n({dataset_name})', fontsize=10)
+    ax.set_xlabel('Generation')
+    ax.set_ylabel(value)
+    ax.legend(fontsize=8)
+
+
+class Analysis():
+    def __init__(
+        self,
+        experiment_name
+        ):
+        
+        self.results = get_all_results(experiment_name)
+        self.logs = get_all_logs(experiment_name)
+        self.experiment_name = experiment_name
+    
+    
+    def get_ranks_by_metric(self):
+        ranks = {}
+        for metric in ['test.accuracy', 'test.f1_score', 'test.roc_auc']:
+            ranks[metric] = get_rankings(self.results, metric)
+
+        self.ranks_by_metric = ranks
+        return ranks
+    
+    
+    
+    def plot_value_by_generations_for_experiment(self, value):
+        grp = self.results.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[['elite_train_error', 'elite_test_error', 'elite_nodes']].median().reset_index()
+        sns.lineplot(data=grp.loc[(grp['dataset'] == 'blood') & (grp['config_id'] < 4)], x='generation', y='elite_train_error', hue='config_id')
+        plt.show()

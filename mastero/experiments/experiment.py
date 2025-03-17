@@ -19,7 +19,6 @@ class Experiment():
         self.data_info = load_and_adapt_data_info(f"{data_filepath}data_info.csv")
         self.verbose = verbose
         self.log = log
-        
     
     def run(self):
         
