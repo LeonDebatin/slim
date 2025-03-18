@@ -97,10 +97,8 @@ def get_rankings(results, metric):
     # Rank the averaged scores within each dataset (higher is better)
     results_avg["rank"] = results_avg.groupby("dataset_name")[metric].rank(ascending=False, method="min")
 
-    # Merge back with original data to maintain all columns
-    results = results.merge(results_avg[["dataset_name", "config_id", "rank"]], on=["dataset_name", "config_id"], how="left")
 
-    return results
+    return results_avg
 
 
 

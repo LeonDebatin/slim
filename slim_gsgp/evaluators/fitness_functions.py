@@ -148,6 +148,70 @@ def sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     y_pred = torch.sigmoid(y_pred)
     return torch.sqrt(torch.mean(torch.square(torch.sub(y_true, y_pred)), dim=len(y_pred.shape) - 1))
 
+
+import torch
+
+def compute_class_weights(y_true: torch.Tensor) -> torch.Tensor:
+    """
+    Compute class weights based on inverse frequency from y_true.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True labels (binary or multi-class).
+
+    Returns
+    -------
+    dict
+        Dictionary mapping each class label to its computed weight.
+    """
+    # Count occurrences of each class
+    unique_classes, counts = torch.unique(y_true, return_counts=True)
+    
+    # Compute inverse frequency weights
+    weights = 1.0 / counts.float()
+
+    # Convert to dictionary for proper mapping
+    class_weight_dict = {int(cls): weight for cls, weight in zip(unique_classes, weights)}
+
+    return class_weight_dict
+
+def weighted_sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
+    """
+    Compute Weighted RMSE after applying sigmoid to predictions, using class weights.
+
+    Parameters
+    ----------
+    y_true : torch.Tensor
+        True labels.
+    y_pred : torch.Tensor
+        Raw model predictions (logits).
+
+    Returns
+    -------
+    torch.Tensor
+        Weighted RMSE.
+    """
+    # Compute class weights as a dictionary
+    class_weights = compute_class_weights(y_true)
+
+    # Assign weights based on class labels (mapping correctly)
+    sample_weights = torch.tensor([class_weights[int(label)] for label in y_true], dtype=torch.float32)
+
+    # Apply sigmoid to predictions
+    y_pred = torch.sigmoid(y_pred)
+    
+    # Compute squared error and apply weights
+    weighted_squared_error = sample_weights * torch.square(y_true - y_pred)
+    
+    # Compute final weighted RMSE
+    weighted_rmse = torch.sqrt(torch.mean(weighted_squared_error))
+    
+    return weighted_rmse
+
+
+
+
 def f1_score(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     """
     Compute F1 score.
@@ -280,31 +344,6 @@ def accuracy(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     tp, tn, fp, fn = get_tp_tn_fp_fn(y_true, y_pred)
 
     return (tp + tn) / (tp + tn + fp + fn)
-
-
-
-def mixed_metric(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
-    """
-    Compute a mixed metric combining accuracy, F1 score and ROC.
-
-    Parameters
-    ----------
-    y_true : torch.Tensor
-        True values.
-    y_pred : torch.Tensor
-        Predicted values.
-
-    Returns
-    -------
-    torch.Tensor
-        Mixed metric value.
-    """
-    acc = accuracy(y_true, y_pred)
-    f1 = f1_score(y_true, y_pred)
-    roc = roc_auc(y_true, y_pred)
-    minmax_roc_auc = 2 * (roc -0.5)
-
-    return 1 / 3 * (acc + f1 + minmax_roc_auc)
 
 
 

@@ -96,9 +96,10 @@ fitness_function_options = {
     "mae_int": mae_int,
     "signed_errors": signed_errors,
     'sigmoid_rmse': sigmoid_rmse,
+    'weighted_sigmoid_rmse': weighted_sigmoid_rmse,
     'f1_score': f1_score,
     'accuracy': accuracy,
-    'roc_auc': roc_auc
+    'roc_auc': roc_auc,
 }
 
 initializer_options = {
