@@ -126,16 +126,19 @@ def get_aggregated_performance(results, metric, agg='mean'):
     return aggregated_performance
 
 def get_rankings(results, metric):
+    #gets ranking for each dataset
     return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=False, method='min')
 
 def get_avg_ranking(results, metric):
+    #gets averaged ranking accross datasets
     return get_rankings(results, metric).mean(axis=0).sort_values().reset_index().rename(columns={0: 'avg_rank'})
 
 def get_ranking_significance(rankings):
+    #used with get_rannkings to test for significance differences for rankings accross datasets
     return stats.friedmanchisquare(*[rankings[col] for col in rankings.columns]).pvalue
 
 
-def plot_rankings(rankings, show = True):
+def plot_avg_ranking(rankings, show = True):
     import numpy as np
     avg_rank = rankings.set_index('config_settings')
     y_positions = np.random.uniform(0, 0, len(avg_rank))
