@@ -117,7 +117,10 @@ def get_performance_difference_significance_table(results, config, metric, pivot
 def sci_notation(x):
     return "{:.3e}".format(x).replace("e", " × 10^")
 
-def get_aggregated_performance(results, metric, agg='mean'):
+def get_aggregated_performance(results, metric, agg='mean', algorithm=None):
+    if algorithm is not None:
+        results = results.loc[results['name'] == algorithm]
+    
     if agg == 'mean':
         aggregated_performance = results.groupby(['dataset_name', 'config_settings', 'run_id'])[metric].mean().unstack().mean(axis=1).sort_values(ascending=False).unstack()
     elif agg == 'median':
@@ -125,11 +128,15 @@ def get_aggregated_performance(results, metric, agg='mean'):
     
     return aggregated_performance
 
-def get_rankings(results, metric):
+def get_rankings(results, metric, algorithm=None):
+    if algorithm is not None:
+        results = results.loc[results['name'] == algorithm]
     #gets ranking for each dataset
     return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=False, method='min')
 
-def get_avg_ranking(results, metric):
+def get_avg_ranking(results, metric, algorithm=None):
+    if algorithm is not None:
+        results = results.loc[results['name'] == algorithm]
     #gets averaged ranking accross datasets
     return get_rankings(results, metric).mean(axis=0).sort_values().reset_index().rename(columns={0: 'avg_rank'})
 
