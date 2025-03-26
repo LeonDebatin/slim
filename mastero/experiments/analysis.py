@@ -4,6 +4,20 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
+import matplotlib.ticker as ticker
+
+colors_dict ={
+            'GP': '#050505',
+            'GSGP': '#7a7a7a',
+            'SLIM*SIG1': '#cd282c',
+            'SLIM*SIG2': '#34429a',
+            'SLIM+SIG1': '#307b12',
+            'SLIM+SIG2': '#e99928',
+            'SLIM+ABS': 'purple',
+            'SLIM*ABS': 'orange'
+            }
+
+hue_order_slim = ['SLIM*SIG1', 'SLIM*SIG2', 'SLIM+SIG1', 'SLIM+SIG2']
 
 
 def expand_dict(df, column):
@@ -76,7 +90,7 @@ def get_performance_difference_significance(performance1, performance2):
     return stats.wilcoxon(performance1, performance2).pvalue
 
 def get_performance_difference_significance_table(results, config, metric, pivot=False):
-    performances = get_aggregated_performance(results, metric)
+    performances = get_aggregated_performance(results, metric, agg='median')
     significances = []
     for dataset_name in results['dataset_name'].unique():
         results_dataset = results.loc[results['dataset_name'] == dataset_name]
@@ -90,13 +104,23 @@ def get_performance_difference_significance_table(results, config, metric, pivot
                 p_value = get_performance_difference_significance(config_results, config2_results)
                 sign = ''
                 
-                if p_value < 0.05:
-                    if performance1 > performance2:
-                        sign = '+'
+                if 'rmse' not in metric:
+                    if p_value < 0.05:
+                        if performance1 > performance2:
+                            sign = '+'
+                        else:
+                            sign = '-'
                     else:
-                        sign = '-'
+                        sign = '≈'
+                
                 else:
-                    sign = '≈'
+                    if p_value < 0.05:
+                        if performance1 < performance2:
+                            sign = '+'
+                        else:
+                            sign = '-'
+                    else:
+                        sign = '≈'
                 
                 significances.append([dataset_name, config, config2, performance1, performance2, p_value, sign])
                 
@@ -117,9 +141,8 @@ def get_performance_difference_significance_table(results, config, metric, pivot
 def sci_notation(x):
     return "{:.3e}".format(x).replace("e", " × 10^")
 
-def get_aggregated_performance(results, metric, agg='mean', algorithm=None):
-    if algorithm is not None:
-        results = results.loc[results['name'] == algorithm]
+def get_aggregated_performance(results, metric, agg='mean', algorithm=None, fitness_function=None):
+    results = filter_results(results, algorithm, fitness_function)
     
     if agg == 'mean':
         aggregated_performance = results.groupby(['dataset_name', 'config_settings', 'run_id'])[metric].mean().unstack().mean(axis=1).sort_values(ascending=False).unstack()
@@ -128,15 +151,17 @@ def get_aggregated_performance(results, metric, agg='mean', algorithm=None):
     
     return aggregated_performance
 
-def get_rankings(results, metric, algorithm=None):
-    if algorithm is not None:
-        results = results.loc[results['name'] == algorithm]
+def get_rankings(results, metric, algorithm=None, fitness_function=None):
+    
+    results = filter_results(results, algorithm, fitness_function)
     #gets ranking for each dataset
-    return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=False, method='min')
+    if any(sub in metric for sub in ('rmse', 'nodes_count')):
+        return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=True, method='min')
+    else:
+        return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=False, method='max')
 
-def get_avg_ranking(results, metric, algorithm=None):
-    if algorithm is not None:
-        results = results.loc[results['name'] == algorithm]
+def get_avg_ranking(results, metric, algorithm=None, fitness_function=None):
+    results = filter_results(results, algorithm, fitness_function)
     #gets averaged ranking accross datasets
     return get_rankings(results, metric).mean(axis=0).sort_values().reset_index().rename(columns={0: 'avg_rank'})
 
@@ -144,6 +169,22 @@ def get_ranking_significance(rankings):
     #used with get_rannkings to test for significance differences for rankings accross datasets
     return stats.friedmanchisquare(*[rankings[col] for col in rankings.columns]).pvalue
 
+
+def filter_results(results, algorithm = None, fitness_function=None):
+    if algorithm is not None:
+        results = results.loc[results['name'] == algorithm]
+    if fitness_function is not None:
+        results = results.loc[results['config.fitness_function'] == fitness_function]
+
+    return results
+
+
+def round_to_nearest_05(num, lower):
+    import math
+    if lower:
+        return math.floor(num * 2) / 2
+    else:
+        return math.ceil(num * 2) / 2
 
 def plot_avg_ranking(rankings, show = True):
     import numpy as np
@@ -174,8 +215,8 @@ def plot_avg_ranking(rankings, show = True):
         # Add a **single x-grid line at y = 0**
         plt.axhline(0, color='gray', linestyle='-', alpha=0.5) 
         # Format x-axis (ranks)
-        plt.xticks(np.arange(avg_rank.values.min(), avg_rank.values.max()+0.5, 0.5))  # Set x-ticks at a step of 0.5
-        plt.xticks(np.arange(avg_rank.values.min(), avg_rank.values.max()+0.5, 0.25), minor=True) 
+        plt.xticks(np.arange(round_to_nearest_05(avg_rank.values.min(), True), round_to_nearest_05(avg_rank.values.max(), False)+0.5, 0.5))  # Set x-ticks at a step of 0.5
+        plt.xticks(np.arange(round_to_nearest_05(avg_rank.values.min(), True), round_to_nearest_05(avg_rank.values.max(), False)+0.5, 0.25), minor=True) 
         plt.grid(which='both', axis='x',  linewidth=1)
         plt.yticks([])  # Hide y-axis ticks
         plt.xticks(fontsize=14)
@@ -184,16 +225,80 @@ def plot_avg_ranking(rankings, show = True):
     return
 
 
+
+
 # def generations_plot(logs, dataset_name, value):
 #     fig, axs = plt.subplots(1, 2, figsize=(12, 4))
 #     sns.lineplot
 
 
+def define_settings(results, setting_dict):
+    
+    keep = list(setting_dict.values())
+    keep.append('config_id')    
+    settings = results[keep].drop_duplicates().sort_values('config_id')
+    
+    settings['config_settings'] = ''
+    for key, value in setting_dict.items():
+        for row in settings.iterrows():
+            settings.loc[row[0], 'config_settings'] += f"{key}{row[1][value]}_"
+    
+    settings = settings[['config_id', 'config_settings']]
+    results = results.merge(settings, on='config_id')
+    return results
 
 
+def get_anova_table(results, metric):
+    anova = []
+    for dataset in results['dataset_name'].unique():
+        results_dataset = results.loc[results['dataset_name'] == dataset]
+        for name in results['name'].unique():
+            results_name = results_dataset.loc[results_dataset['name'] == name]
+            p_value = stats.f_oneway(*[results_name.loc[results_name['config.p_inflate'] == p_inflate][metric] for p_inflate in results_name['config.p_inflate'].unique()]).pvalue
+            anova.append([dataset, name, p_value])
+    
+    return pd.DataFrame(anova, columns=['dataset', 'name', 'p_value']).pivot_table(index='dataset', columns='name', values='p_value')
 
+def table_to_latex(table, experiment, name, caption):
+        
+    latex_table = table.to_latex(column_format="l" + "c" * len(table.columns), escape=False)
+    latex_code = f"""
+    \\begin{{table}}[h]
+        \\centering
+        \\renewcommand{{\\arraystretch}}{{1.2}}
+        {latex_table}
+        \\caption{{{caption}}}
+        \\label{{tab:{name}}}
+    \\end{{table}}
+    """
+    with open(f"{experiment}_latex/tables/{name}.tex", "w") as f:
+        f.write(latex_code)
+    return
+    
+def create_countplot(results, metric):
+    results.groupby(['dataset_name', 'name', 'config.p_inflate']).agg({metric: 'mean'}).reset_index()
+    results.groupby(['dataset_name', 'name']).agg({metric: 'min'}).reset_index()
+    results_min = results.loc[results.groupby(['dataset_name', 'name'])[metric].idxmin(), ['dataset_name', 'name', metric, 'config.p_inflate']]
+    results_min = results_min.reset_index(drop=True)
+    
+    fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+    sns.countplot(results_min, x='config.p_inflate', hue='name', palette=colors_dict, width=0.5, hue_order=hue_order_slim)
+    
+    return fig
 
-
+def plot_to_latex(figure, experiment, name, caption):
+    figure.savefig(f"{experiment}_latex/figures/{name}.png", dpi=500, bbox_inches='tight', transparent=True)
+    
+    latex_code = f"""
+    \\begin{{figure}}[h]
+    \\centering
+    \\includegraphics[width=\\linewidth]{{figures/{name}.png}}
+    \\caption{{{caption}}}
+    \\label{{fig:{name}}}
+    \\end{{figure}}
+    """
+    with open(f"{experiment}_latex/figures/{name}.tex", "w") as f:
+        f.write(latex_code)
 
 def get_log(experiment, dataset_name, config_id, add_columns = True):
     log = pd.read_csv(f"../../data/results/{experiment}/{dataset_name}/log_config_id_{config_id}.csv")
@@ -235,45 +340,52 @@ def get_all_logs(experiment):
     
     return logs
 
-def plot_value_by_generations(logs, value, dataset_name, ax):
+
+
+
+
+
+def plot_value_by_generations(logs, value, ax, y_max=None):
     """Plots value over generations for a specific dataset on a given subplot axis."""
     # Group and calculate median
-    grp = logs.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[[value]].median().reset_index()
-    
+    grp = logs.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[[value]].mean().reset_index()
+
     # Plot using seaborn on the given subplot axis
-    sns.lineplot(data=grp.loc[grp['dataset'] == dataset_name], x='generation', y=value, hue='algorithm', ax=ax)
-    
+    sns.lineplot(data=grp, x='generation', y=value, hue='algorithm', ax=ax, palette=colors_dict)
+
     # Set labels and title
-    ax.set_title(f'{value} by Generation\n({dataset_name})', fontsize=10)
+    ax.set_title(f'{logs["dataset"].iloc[0]}')
     ax.set_xlabel('Generation')
     ax.set_ylabel(value)
     ax.legend(fontsize=8)
+    ax.yaxis.set_major_locator(ticker.LinearLocator(5))
+    if value == 'elite_nodes':
+        ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x)}"))
+    else:
+        ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.3f}")) 
+    #ax.set_xlim(0, 2000)
+    if y_max:
+        ax.set_ylim(0, y_max)
 
 
 
 
-
-
-def get_config_settings(results):
-    settings = results[['config_id', 'name']].drop_duplicates().sort_values('config_id')
-    settings['config_settings'] = settings['name']
-    settings = settings[['config_id', 'config_settings']]
-    results = results.merge(settings, on='config_id')
-    return results
 
 class Analysis():
     def __init__(
         self,
-        experiment_name
+        experiment_name,
+        settings_dict
+        
         ):
         
-        self.results = get_all_results(experiment_name)
-        self.results = get_config_settings(self.results)
+        self.results = define_settings(results=get_all_results(experiment_name), setting_dict=settings_dict)
         self.logs = get_all_logs(experiment_name)
         self.experiment_name = experiment_name
         
     
-
+    def get_aggregated_performance(self, metric, agg='mean', algorithm=None, fitness_function=None):
+        return
         
     
     
@@ -288,6 +400,13 @@ class Analysis():
     
     
     def plot_value_by_generations_for_experiment(self, value):
-        grp = self.results.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[['elite_train_error', 'elite_test_error', 'elite_nodes']].median().reset_index()
+        grp = self.results.groupby(['config_settings', 'algorithm', 'dataset', 'generation'])[['elite_train_error', 'elite_test_error', 'elite_nodes']].median().reset_index()
         sns.lineplot(data=grp.loc[(grp['dataset'] == 'blood') & (grp['config_id'] < 4)], x='generation', y='elite_train_error', hue='config_id')
         plt.show()
+        
+        
+    
+    # def run():
+    #     if self.experiment_name == 'RQ1':
+    #         anova_table = get_anova_table(self.results, 'test.rmse')
+    #         return

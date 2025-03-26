@@ -92,20 +92,22 @@ def train_model(dataset_name, X_train, y_train, X_test, y_test, model, **model_c
 
 def evaluate_prediction(y_true, y_pred):
     
+    rms = rmse(y_true, y_pred)
     acc = accuracy(y_true, y_pred)
     roc = roc_auc(y_true, y_pred)
     f1 = f1_score(y_true, y_pred)
     prec = precision(y_true, y_pred)
     rec = recall(y_true, y_pred)    
     
-    return acc, roc, f1, prec, rec
+    return rms, acc, roc, f1, prec, rec
 
 
 def get_evaluation_dictionary(y_true, y_pred):
     
-    acc, roc, f1, prec, rec = evaluate_prediction(y_true, y_pred)
+    rms, acc, roc, f1, prec, rec = evaluate_prediction(y_true, y_pred)
     
     evaluation_dict = {
+        'rmse': rms.item(),
         'accuracy': acc.item(),
         'roc_auc': roc.item(),
         'f1_score': f1.item(),
@@ -118,8 +120,12 @@ def get_evaluation_dictionary(y_true, y_pred):
 
 
 
-def fill_config(model_config, oversampling, fitness_function, minimization):
+def fill_config(model_config, oversampling, fitness_function, minimization, inflation_rate):
     model_config["oversampling"] = oversampling
     model_config['config']["fitness_function"] = fitness_function
     model_config['config']["minimization"] = minimization
+    
+    if model_config['name'] == 'slim':
+        model_config['config']['p_inflate'] = inflation_rate
+    
     return model_config

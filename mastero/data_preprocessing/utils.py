@@ -24,7 +24,12 @@ def info_dict(name, df, categoricals):
     info['name'] = name
     info['n_samples'] = df.shape[0]
     info['n_features'] = df.shape[1] - 1
-    info['imbalance'] = df['target'].value_counts(ascending=True)[1] / df.shape[0]
+    
+    imbalance = df['target'].value_counts(ascending=True)[1] / df.shape[0]
+    if imbalance > 0.5:
+        imbalance = 1 - imbalance
+        
+    info['imbalance'] = imbalance
     info['categoricals'] = categoricals
     info['n_categoricals'] = len(categoricals)
     info['train_indices'], info['test_indices'] = get_train_test_indices(df)

@@ -43,7 +43,7 @@ class MonteCarlo():
 
             with open(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}/results.csv', mode="w", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(["config_id", "run_id", "config", "metrics"])
+                writer.writerow(["config_id", "run_id", "config", "metrics", "nodes_count"])
             
             config_counter = 0
         
@@ -88,6 +88,13 @@ class MonteCarlo():
                 metrics['train'] = get_evaluation_dictionary(y_train, best_individual.predict(X_train))
                 metrics['test'] = get_evaluation_dictionary(y_test, best_individual.predict(X_test))
                 
+                if model_config['name'] == 'slim':
+                    node_count = best_individual.nodes_count
+                elif model_config['name'] == 'gp':
+                    node_count = best_individual.node_count
+                else:
+                    node_count = best_individual.nodes
+                
                 if self.verbose:
                     print(
                         f"Run {i} - Accuracy: {round(metrics['train']['accuracy'], 3)} | "
@@ -102,7 +109,7 @@ class MonteCarlo():
                     
                     with open(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}/results.csv', mode="a", newline="") as file:
                         writer = csv.writer(file)
-                        writer.writerow([config_id, run_id, model_config, metrics])
+                        writer.writerow([config_id, run_id, model_config, metrics, node_count])
 
         
         return None
