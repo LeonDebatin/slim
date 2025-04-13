@@ -145,7 +145,10 @@ class SLIM_GSGP:
         test_elite=False,
         log_path=None,
         ffunction=None,
-        max_depth=17,
+        ############
+        max_depth=None,
+        #17 beore
+        ##########
         n_elites=1,
         reconstruct=True,
         n_jobs=1):

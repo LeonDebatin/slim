@@ -42,9 +42,7 @@ def rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     torch.Tensor
         RMSE value.
     """
-    
-    y_pred = torch.sigmoid(y_pred)
-    
+        
     return torch.sqrt(torch.mean(torch.square(torch.sub(y_true, y_pred)), dim=len(y_pred.shape) - 1))
 
 
@@ -149,32 +147,40 @@ def sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     return torch.sqrt(torch.mean(torch.square(torch.sub(y_true, y_pred)), dim=len(y_pred.shape) - 1))
 
 
-import torch
-
-def compute_class_weights(y_true: torch.Tensor) -> torch.Tensor:
+def compute_class_weights(y_true: torch.Tensor) -> dict:
     """
-    Compute class weights based on inverse frequency from y_true.
+    Compute class weights based on inverse frequency, normalized to sum to 1.
+    Independent of dataset size.
 
     Parameters
     ----------
     y_true : torch.Tensor
-        True labels (binary or multi-class).
+        Tensor of true labels (binary or multi-class).
 
     Returns
     -------
     dict
-        Dictionary mapping each class label to its computed weight.
+        Dictionary mapping each class label to its normalized weight.
     """
-    # Count occurrences of each class
     unique_classes, counts = torch.unique(y_true, return_counts=True)
-    
-    # Compute inverse frequency weights
-    weights = 1.0 / counts.float()
 
-    # Convert to dictionary for proper mapping
-    class_weight_dict = {int(cls): weight for cls, weight in zip(unique_classes, weights)}
+    # Compute frequencies
+    frequencies = counts.float() / counts.sum()
+
+    # Inverse frequencies
+    inv_freq = 1.0 / frequencies
+
+    # Normalize inverse frequencies to sum to 1
+    norm_weights = inv_freq / inv_freq.sum()
+
+    # Convert to dictionary
+    class_weight_dict = {int(cls): float(weight) for cls, weight in zip(unique_classes, norm_weights)}
 
     return class_weight_dict
+
+
+train_sample_weights = None
+test_sample_weights = None
 
 def weighted_sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:
     """
@@ -193,10 +199,14 @@ def weighted_sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.T
         Weighted RMSE.
     """
     # Compute class weights as a dictionary
-    class_weights = compute_class_weights(y_true)
-
+    #print(len(train_sample_weights))
     # Assign weights based on class labels (mapping correctly)
-    sample_weights = torch.tensor([class_weights[int(label)] for label in y_true], dtype=torch.float32)
+    if len(y_true) == len(train_sample_weights):
+        sample_weights = train_sample_weights
+    elif len(y_true) == len(test_sample_weights):
+        sample_weights = test_sample_weights
+    else:
+        raise ValueError("Mismatch between sample weights and true labels length.")
 
     # Apply sigmoid to predictions
     y_pred = torch.sigmoid(y_pred)
@@ -208,6 +218,8 @@ def weighted_sigmoid_rmse(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.T
     weighted_rmse = torch.sqrt(torch.mean(weighted_squared_error))
     
     return weighted_rmse
+
+
 
 
 

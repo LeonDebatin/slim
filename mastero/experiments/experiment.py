@@ -14,7 +14,8 @@ class Experiment():
         model_configs,  # List of dictionaries
         n_runs=30,
         log=False,
-        verbose=False
+        verbose=False,
+        config_counter_start = 0
     ):
         self.experiment_name = experiment_name
         self.data_filepath = data_filepath
@@ -23,6 +24,7 @@ class Experiment():
         self.data_info = load_and_adapt_data_info(f"{data_filepath}data_info.csv")
         self.verbose = verbose
         self.log = log
+        self.config_counter_start = config_counter_start
 
     def _run_montecarlo(self, data_name):
         """Helper function to run a MonteCarlo simulation."""
@@ -34,7 +36,8 @@ class Experiment():
             n_runs=self.n_runs,
             log=self.log,
             verbose=self.verbose,
-            data_info=self.data_info
+            data_info=self.data_info,
+            config_counter_start = self.config_counter_start
         ).run()
 
     def run(self, parallel=False):

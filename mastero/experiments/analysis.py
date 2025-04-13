@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 import matplotlib.ticker as ticker
+import re
 
 colors_dict ={
             'GP': '#050505',
@@ -104,7 +105,7 @@ def get_performance_difference_significance_table(results, config, metric, pivot
                 p_value = get_performance_difference_significance(config_results, config2_results)
                 sign = ''
                 
-                if 'rmse' not in metric:
+                if ('rmse' not in metric) and ('nodes_count' not in metric):
                     if p_value < 0.05:
                         if performance1 > performance2:
                             sign = '+'
@@ -138,11 +139,21 @@ def get_performance_difference_significance_table(results, config, metric, pivot
         return sig_df
 
 
+def get_slim_performance_difference_significance_table(results, metric):
+    slimmulsig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM*SIG1', 'GP', 'GSGP']) ], config='SLIM*SIG1_', metric = metric, pivot = True)
+    slimmulsig2 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM*SIG2', 'GP', 'GSGP']) ], config='SLIM*SIG2_', metric=metric, pivot=True)
+    slimplussig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM+SIG1', 'GP', 'GSGP']) ], config='SLIM+SIG1_', metric=metric, pivot = True)
+    slimplussig2 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM+SIG2', 'GP', 'GSGP']) ], config='SLIM+SIG2_', metric=metric, pivot=True)
+    
+    df = pd.concat([slimmulsig1, slimmulsig2, slimplussig1, slimplussig2], axis =1)
+    return df
+
+
 def sci_notation(x):
     return "{:.3e}".format(x).replace("e", " × 10^")
 
-def get_aggregated_performance(results, metric, agg='mean', algorithm=None, fitness_function=None):
-    results = filter_results(results, algorithm, fitness_function)
+def get_aggregated_performance(results, metric, agg='mean', algorithm=None, fitness_function=None, ms = None):
+    results = filter_results(results, algorithm, fitness_function, ms)
     
     if agg == 'mean':
         aggregated_performance = results.groupby(['dataset_name', 'config_settings', 'run_id'])[metric].mean().unstack().mean(axis=1).sort_values(ascending=False).unstack()
@@ -156,9 +167,9 @@ def get_rankings(results, metric, algorithm=None, fitness_function=None):
     results = filter_results(results, algorithm, fitness_function)
     #gets ranking for each dataset
     if any(sub in metric for sub in ('rmse', 'nodes_count')):
-        return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=True, method='min')
+        return get_aggregated_performance(results, metric, 'median').rank(axis=1, ascending=True, method='min')
     else:
-        return get_aggregated_performance(results, metric, 'mean').rank(axis=1, ascending=False, method='max')
+        return get_aggregated_performance(results, metric, 'median').rank(axis=1, ascending=False, method='max')
 
 def get_avg_ranking(results, metric, algorithm=None, fitness_function=None):
     results = filter_results(results, algorithm, fitness_function)
@@ -170,14 +181,29 @@ def get_ranking_significance(rankings):
     return stats.friedmanchisquare(*[rankings[col] for col in rankings.columns]).pvalue
 
 
-def filter_results(results, algorithm = None, fitness_function=None):
+def filter_results(results, algorithm = None, fitness_function=None, ms_upper = None):
     if algorithm is not None:
         results = results.loc[results['name'] == algorithm]
     if fitness_function is not None:
         results = results.loc[results['config.fitness_function'] == fitness_function]
+    if ms_upper is not None:
+        results = results.loc[results['config.ms_upper'] == ms_upper]
 
     return results
 
+
+def get_multimetric_ranking_significance(results):
+    accuracy = get_ranking_significance(get_rankings(results, 'test.accuracy'))
+    f1_score = get_ranking_significance(get_rankings(results, 'test.f1_score'))
+    roc_auc = get_ranking_significance(get_rankings(results, 'test.roc_auc'))
+    rmse = get_ranking_significance(get_rankings(results, 'test.rmse'))
+    
+    print(f"P-Value of the Friedman Test for ranks regarding Accuracy: {accuracy:.5f}")
+    print(f"P-Value of the Friedman Test for ranks regarding F1-Score: {f1_score:.5f}")
+    print(f"P-Value of the Friedman Test for ranks regarding ROC-AUC: {roc_auc:.5f}")
+    print(f"P-Value of the Friedman Test for ranks regarding RMSE: {rmse:.5f}")
+    return
+    
 
 def round_to_nearest_05(num, lower):
     import math
@@ -225,6 +251,132 @@ def plot_avg_ranking(rankings, show = True):
     return
 
 
+def plot_avg_ranking_multimetrix(results):
+    roc_auc = get_avg_ranking(results, metric='test.roc_auc').rename(columns={'avg_rank': 'roc_auc'}).set_index('config_settings')
+    f1_score = get_avg_ranking(results, metric='test.f1_score').rename(columns={'avg_rank': 'f1_score'}).set_index('config_settings')
+    accuracy = get_avg_ranking(results, metric='test.accuracy').rename(columns={'avg_rank': 'accuracy'}).set_index('config_settings')
+    rmse = get_avg_ranking(results, metric='test.rmse').rename(columns={'avg_rank': 'rmse'}).set_index('config_settings')
+    rankings = pd.concat([roc_auc, f1_score, accuracy, rmse], axis=1).T
+    rankings.columns = rankings.columns.str.rstrip('_')
+    fig, ax = plt.subplots(1, 1, figsize=(8,5))
+    sns.lineplot(rankings, dashes=False, markers='o', palette=colors_dict)
+    plt.gca().invert_yaxis()
+    plt.ylabel('Average Rank')
+    plt.xlabel('Metric')
+    ax.legend_.remove()
+    plt.show()
+
+def plot_by_p_inflate(results, metric):
+    agg_performances = []
+    unique_algorithms = results['name'].unique()
+    for algorithm in unique_algorithms:
+
+        agg_performance = get_aggregated_performance(results, metric=metric, agg='median', algorithm=algorithm)
+        agg_performance.columns = [re.search(r'inflate([\d.]+)_', col).group(1) for col in agg_performance.columns]
+        agg_performances.append(agg_performance)
+    df_agg = pd.concat(agg_performances, keys=unique_algorithms).T
+    print(df_agg)
+    
+    unique_datasets = results['dataset_name'].unique()
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(12, 15), squeeze=False)
+
+    j = 0
+    i = 0
+    for dataset in unique_datasets:
+        sns.lineplot(data=df_agg.loc[:,df_agg.columns.get_level_values(1) == dataset], dashes=False, marker = 'o', palette=colors_dict,  ax=ax[i, j])
+        ax[i,j].set_title(f'{dataset}')
+        ax[i,j].set_xlabel('p_inflate')
+        ax[i,j].set_ylabel(metric)
+        ax[i,j].legend_.remove()
+        ax[i,j].yaxis.set_major_locator(ticker.LinearLocator(5))
+        if metric == 'nodes_count':
+            ax[i,j].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x)}"))
+        else:
+            ax[i,j].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.3f}")) 
+        #ax[i,j].legend_.remove()
+        j = (j + 1) % 2
+        i = i +1 if j == 0 else i
+    
+    #fig.legend(unique_algorithms)
+    fig.tight_layout()
+    plt.show()    
+
+
+def plot_by_p_inflate2(results, metric):
+    agg_performances = []
+    unique_algorithms = results['name'].unique()
+    unique_ms = results['config.ms_upper'].unique()
+    for algorithm in unique_algorithms:
+        for ms in unique_ms:
+            agg_performance = get_aggregated_performance(results, metric=metric, agg='median', algorithm=algorithm, ms=ms)
+            agg_performance.columns = [re.search(r'inflate([\d.]+)_', col).group(1) for col in agg_performance.columns]
+            print(ms, algorithm)
+            print(agg_performance)
+            agg_performances.append(agg_performance)
+    df_agg = pd.concat(agg_performances, keys=unique_algorithms).T
+    print(df_agg)
+    
+    unique_datasets = results['dataset_name'].unique()
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(12, 15), squeeze=False)
+
+    j = 0
+    i = 0
+    for dataset in unique_datasets:
+        for ms in unique_ms:
+            sns.lineplot(data=df_agg.loc[:,df_agg.columns.get_level_values(1) == dataset], dashes=False, marker = 'o', palette=colors_dict,  ax=ax[i, j])
+        sns.lineplot(data=df_agg.loc[:,df_agg.columns.get_level_values(1) == dataset], dashes=False, marker = 'o', palette=colors_dict,  ax=ax[i, j])
+        ax[i,j].set_title(f'{dataset}')
+        ax[i,j].set_xlabel('p_inflate')
+        ax[i,j].set_ylabel(metric)
+        ax[i,j].legend_.remove()
+        ax[i,j].yaxis.set_major_locator(ticker.LinearLocator(5))
+        if metric == 'nodes_count':
+            ax[i,j].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x)}"))
+        else:
+            ax[i,j].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.3f}")) 
+        #ax[i,j].legend_.remove()
+        j = (j + 1) % 2
+        i = i +1 if j == 0 else i
+    
+    #fig.legend(unique_algorithms)
+    fig.tight_layout()
+    plt.show()    
+
+
+
+
+def error_evolution_plot(logs):
+    unique_datasets = logs['dataset'].unique()
+
+    # Create subplots
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(10, 30), squeeze=False)
+
+    for i, dataset in enumerate(unique_datasets):
+        dataset_logs = logs[logs['dataset'] == dataset]
+
+        # Call the function without assignment
+        plot_value_by_generations(dataset_logs, 'elite_train_error', ax=ax[i, 0])
+        plot_value_by_generations(dataset_logs, 'elite_test_error', ax=ax[i, 1])
+
+    fig.tight_layout()
+    plt.show()
+
+
+
+def tree_size_evolution_plot(logs):
+    unique_datasets = logs['dataset'].unique()
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(10, 15), squeeze=False)
+
+    j = 0
+    i = 0
+    for dataset in unique_datasets:
+        dataset_logs = logs[logs['dataset'] == dataset]
+        plot_value_by_generations(dataset_logs, 'elite_nodes', ax=ax[i, j], y_max=2000)
+        j = (j + 1) % 2
+        i = i +1 if j == 0 else i
+
+    fig.tight_layout()
+    plt.show()
 
 
 # def generations_plot(logs, dataset_name, value):
@@ -275,16 +427,19 @@ def table_to_latex(table, experiment, name, caption):
         f.write(latex_code)
     return
     
-def create_countplot(results, metric):
+def plot_countplot(results, metric):
     results.groupby(['dataset_name', 'name', 'config.p_inflate']).agg({metric: 'mean'}).reset_index()
     results.groupby(['dataset_name', 'name']).agg({metric: 'min'}).reset_index()
     results_min = results.loc[results.groupby(['dataset_name', 'name'])[metric].idxmin(), ['dataset_name', 'name', metric, 'config.p_inflate']]
     results_min = results_min.reset_index(drop=True)
     
-    fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+    fig, ax = plt.subplots(1, 1, figsize=(8, 5))
     sns.countplot(results_min, x='config.p_inflate', hue='name', palette=colors_dict, width=0.5, hue_order=hue_order_slim)
-    
-    return fig
+    ax.set_xlabel('p_inflate')
+    ax.set_ylabel('Best Performance Count')
+    ax.legend_.remove()
+    plt.show()
+    return
 
 def plot_to_latex(figure, experiment, name, caption):
     figure.savefig(f"{experiment}_latex/figures/{name}.png", dpi=500, bbox_inches='tight', transparent=True)
@@ -348,7 +503,7 @@ def get_all_logs(experiment):
 def plot_value_by_generations(logs, value, ax, y_max=None):
     """Plots value over generations for a specific dataset on a given subplot axis."""
     # Group and calculate median
-    grp = logs.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[[value]].mean().reset_index()
+    grp = logs.groupby(['config_id', 'algorithm', 'dataset', 'generation'])[[value]].median().reset_index()
 
     # Plot using seaborn on the given subplot axis
     sns.lineplot(data=grp, x='generation', y=value, hue='algorithm', ax=ax, palette=colors_dict)
@@ -357,7 +512,7 @@ def plot_value_by_generations(logs, value, ax, y_max=None):
     ax.set_title(f'{logs["dataset"].iloc[0]}')
     ax.set_xlabel('Generation')
     ax.set_ylabel(value)
-    ax.legend(fontsize=8)
+    ax.legend_.remove()
     ax.yaxis.set_major_locator(ticker.LinearLocator(5))
     if value == 'elite_nodes':
         ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x)}"))
@@ -366,8 +521,37 @@ def plot_value_by_generations(logs, value, ax, y_max=None):
     #ax.set_xlim(0, 2000)
     if y_max:
         ax.set_ylim(0, y_max)
+        
+###mean and standard deviation
+# def plot_value_by_generations(logs, value, ax, y_max=None):
+#     """Plots mean and standard deviation of a value over generations for a specific dataset on a given subplot axis."""
+#     # Group and calculate mean and std
+#     stats = logs.groupby(['algorithm', 'dataset', 'generation'])[value].agg(['mean', 'std']).reset_index()
 
+#     # Plot each algorithm separately
+#     for algo in stats['algorithm'].unique():
+#         data_algo = stats[stats['algorithm'] == algo]
+#         ax.plot(data_algo['generation'], data_algo['mean'], label=algo, color=colors_dict.get(algo, None))
+#         ax.fill_between(
+#             data_algo['generation'],
+#             data_algo['mean'] - data_algo['std'],
+#             data_algo['mean'] + data_algo['std'],
+#             color=colors_dict.get(algo, None),
+#             alpha=0.3
+#         )
 
+#     # Set labels and title
+#     ax.set_title(f'{logs["dataset"].iloc[0]}')
+#     ax.set_xlabel('Generation')
+#     ax.set_ylabel(value)
+#     #ax.legend_.remove()
+#     ax.yaxis.set_major_locator(ticker.LinearLocator(5))
+#     if value == 'elite_nodes':
+#         ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x)}"))
+#     else:
+#         ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.3f}")) 
+#     if y_max:
+#         ax.set_ylim(0, y_max)
 
 
 

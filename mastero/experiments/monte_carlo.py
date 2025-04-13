@@ -13,7 +13,8 @@ class MonteCarlo():
         n_runs=30,
         log = False,
         verbose = False,
-        data_info = None
+        data_info = None,
+        config_counter_start = 0
     ):
         self.experiment_name = experiment_name
         self.dataset_name = dataset_name
@@ -23,6 +24,7 @@ class MonteCarlo():
         self.data = pd.read_csv(f"{data_filepath}data_prepared/{dataset_name}.csv")
         self.verbose = verbose
         self.log = log
+        self.config_counter_start = config_counter_start
         
         if data_info is not None:
             self.data_info = data_info
@@ -45,11 +47,11 @@ class MonteCarlo():
                 writer = csv.writer(file)
                 writer.writerow(["config_id", "run_id", "config", "metrics", "nodes_count"])
             
-            config_counter = 0
+            config_counter = self.config_counter_start
         
             
         for model_config in self.model_configs:
-            
+            print(f"Running {model_config['name']} on {self.dataset_name}...")
             if self.log:
                 config_counter = config_counter + 1
             
@@ -74,6 +76,9 @@ class MonteCarlo():
                                                                         categoricals = self.data_info.loc[self.data_info['name']== self.dataset_name, 'categoricals'].values[0]
                                                                     )
 
+                if model_config['config']['fitness_function'] == 'weighted_sigmoid_rmse':
+                    update_sample_weights(y_train, y_test)
+                
                 best_individual = train_model(
                                                 dataset_name = self.dataset_name, 
                                                 X_train = X_train, 
@@ -102,7 +107,11 @@ class MonteCarlo():
                         f"ROC: {round(metrics['train']['roc_auc'], 3)} | "
                         f"{round(metrics['test']['roc_auc'], 3)} - "
                         f"F1: {round(metrics['train']['f1_score'], 3)} | "
-                        f"{round(metrics['test']['f1_score'], 3)}"
+                        f"{round(metrics['test']['f1_score'], 3)} - "
+                        f"RMSE: {round(metrics['train']['rmse'], 3)} | "
+                        f"{round(metrics['test']['rmse'], 3)} -"
+                        f" Weighted RMSE: {round(metrics['train']['wrmse'], 3)} | "
+                        f"{round(metrics['test']['wrmse'], 3)}"
                         )
 
                 if self.log:

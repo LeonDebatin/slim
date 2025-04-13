@@ -3,7 +3,7 @@ import copy
 
 basic_config_all = {
     'pop_size': 100, #100
-    'n_iter': 500,  #2000
+    'n_iter': 1000,  #2000
     'elitism': True,
     'n_elites': 1,
     'init_depth': 6,
@@ -25,7 +25,7 @@ basic_config_all = {
 
 basic_config_gp = {
     'p_xo': 0.8,
-    'max_depth': 17
+    'max_depth': 20
 }
 
 basic_model_config_gp = {
@@ -53,7 +53,8 @@ basic_config_slim= {
     'ms_upper': 1,
     'p_inflate': 0.5,
     'reconstruct': True,
-    'copy_parent': True
+    'copy_parent': True,
+    'max_depth': None
 }
 
 basic_model_config_slim = {

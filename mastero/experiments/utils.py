@@ -9,8 +9,9 @@ from slim_gsgp.main_gp import gp
 from slim_gsgp.main_slim import slim
 from slim_gsgp.main_gsgp import gsgp
 from slim_gsgp.evaluators.fitness_functions import *
+import slim_gsgp.evaluators.fitness_functions
 from imblearn.over_sampling import SMOTENC, SMOTE, SMOTEN
-
+import numpy as np
 
 
 
@@ -90,24 +91,46 @@ def train_model(dataset_name, X_train, y_train, X_test, y_test, model, **model_c
     return best_individual
 
 
+def compute_class_weights(y):
+    """
+    y: list, numpy array, or 1D torch tensor of class labels
+    returns: torch tensor of class weights
+    """
+    y = torch.tensor(y) if not torch.is_tensor(y) else y
+    classes, counts = torch.unique(y, return_counts=True)
+    total_samples = y.size(0)
+
+    weights = total_samples / (len(classes) * counts.float())
+    return weights
+
+def update_sample_weights(y_train, y_test):
+    class_weights = compute_class_weights(y_train)
+    # class_weight_dict = {int(label): weight for label, weight in zip(np.unique(y_train), class_weights)}
+    train_sample_weights = torch.tensor([class_weights[int(label)] for label in y_train], dtype=torch.float32)
+    test_sample_weights = torch.tensor([class_weights[int(label)] for label in y_test], dtype=torch.float32)
+    slim_gsgp.evaluators.fitness_functions.train_sample_weights = train_sample_weights
+    slim_gsgp.evaluators.fitness_functions.test_sample_weights = test_sample_weights
+    return
+
 def evaluate_prediction(y_true, y_pred):
-    
-    rms = rmse(y_true, y_pred)
+    rms = sigmoid_rmse(y_true, y_pred)
+    wrms = weighted_sigmoid_rmse(y_true, y_pred)
     acc = accuracy(y_true, y_pred)
     roc = roc_auc(y_true, y_pred)
     f1 = f1_score(y_true, y_pred)
     prec = precision(y_true, y_pred)
     rec = recall(y_true, y_pred)    
     
-    return rms, acc, roc, f1, prec, rec
+    return rms, wrms, acc, roc, f1, prec, rec
 
 
 def get_evaluation_dictionary(y_true, y_pred):
     
-    rms, acc, roc, f1, prec, rec = evaluate_prediction(y_true, y_pred)
+    rms, wrms, acc, roc, f1, prec, rec = evaluate_prediction(y_true, y_pred)
     
     evaluation_dict = {
         'rmse': rms.item(),
+        'wrmse': wrms.item(),
         'accuracy': acc.item(),
         'roc_auc': roc.item(),
         'f1_score': f1.item(),
@@ -120,12 +143,18 @@ def get_evaluation_dictionary(y_true, y_pred):
 
 
 
-def fill_config(model_config, oversampling, fitness_function, minimization, inflation_rate):
+def fill_config(model_config, oversampling, fitness_function, minimization, inflation_rate, ms_upper):
     model_config["oversampling"] = oversampling
     model_config['config']["fitness_function"] = fitness_function
     model_config['config']["minimization"] = minimization
     
     if model_config['name'] == 'slim':
         model_config['config']['p_inflate'] = inflation_rate
+        model_config['config']['ms_upper'] = ms_upper
+    
+    if model_config['name'] == 'gsgp':
+        model_config['config']['ms_upper'] = ms_upper
     
     return model_config
+
+
