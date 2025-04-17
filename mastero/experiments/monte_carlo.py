@@ -76,8 +76,7 @@ class MonteCarlo():
                                                                         categoricals = self.data_info.loc[self.data_info['name']== self.dataset_name, 'categoricals'].values[0]
                                                                     )
 
-                if model_config['config']['fitness_function'] == 'weighted_sigmoid_rmse':
-                    update_sample_weights(y_train, y_test)
+                update_sample_weights(y_train, y_test)
                 
                 best_individual = train_model(
                                                 dataset_name = self.dataset_name, 

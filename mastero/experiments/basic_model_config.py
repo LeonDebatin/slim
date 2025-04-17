@@ -37,7 +37,7 @@ basic_model_config_gp = {
 basic_config_gsgp = {
     'p_xo': 0,
     'ms_lower': 0,
-    'ms_upper': 1,
+    'ms_upper': None,
     'reconstruct' : True
 }
 
@@ -50,8 +50,8 @@ basic_model_config_gsgp = {
 basic_config_slim= {
     'slim_version': None,
     'ms_lower': 0,
-    'ms_upper': 1,
-    'p_inflate': 0.5,
+    'ms_upper': None,
+    'p_inflate': None,
     'reconstruct': True,
     'copy_parent': True,
     'max_depth': None
