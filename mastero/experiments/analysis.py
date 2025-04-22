@@ -6,19 +6,18 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import matplotlib.ticker as ticker
 import re
+import numpy as np
+import math
+from sklearn.preprocessing import MinMaxScaler
 
 colors_dict ={
             'GP': '#050505',
             'GSGP': '#7a7a7a',
-            'SLIM*SIG1': '#cd282c',
-            'SLIM*SIG2': '#34429a',
             'SLIM+SIG1': '#307b12',
-            'SLIM+SIG2': '#e99928',
-            'SLIM+ABS': 'purple',
-            'SLIM*ABS': 'orange'
+            'SLIM*SIG1': '#cd282c'
             }
 
-hue_order_slim = ['SLIM*SIG1', 'SLIM*SIG2', 'SLIM+SIG1', 'SLIM+SIG2']
+hue_order_slim = ['SLIM+SIG1', 'SLIM*SIG1']
 
 
 def expand_dict(df, column):
@@ -55,6 +54,7 @@ def get_results(experiment, dataset_name):
     results = expand_dict(results, 'config')
     results = expand_dict(results, 'metrics')
     
+    
     return results
 
 def get_all_results(experiment):
@@ -82,26 +82,41 @@ def get_all_results(experiment):
         results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
 
     results['name'] = results['name'].str.upper()
-    
-    
+    results['dataset_name'] = results['dataset_name'].str.capitalize()
     return results
 
 
+
+
 def get_performance_difference_significance(performance1, performance2):
+    
+    performance1 = subset[subset['config_id'] == config_id][metric].values
+    performance2 = subset[subset['config_id'] == config_id2][metric].values
+    
+    if np.all(performance1 == performance2):
+        p_value = 1.0
+    
+    else:
+        p_value = stats.wilcoxon(performance1, performance2).pvalue
     return stats.wilcoxon(performance1, performance2).pvalue
 
-def get_performance_difference_significance_table(results, config, metric, pivot=False):
-    performances = get_aggregated_performance(results, metric, agg='median')
+def get_performance_difference_significance_table(results, differentiator, metric, pivot=False):
+
+    
+    
+    
+    
     significances = []
     for dataset_name in results['dataset_name'].unique():
         results_dataset = results.loc[results['dataset_name'] == dataset_name]
-        config_results = results_dataset.loc[results_dataset['config_settings'] == config, metric]
         
-        for config2 in results['config_settings'].unique():
+        config_results = results_dataset.loc[results_dataset['config.fitness_function'] == config, metric]
+        
+        for config2 in results['config.fitness_function'].unique():
             if config2 != config:
-                config2_results = results_dataset.loc[results_dataset['config_settings'] == config2, metric]
-                performance1 = performances.loc[dataset_name, config]
-                performance2 = performances.loc[dataset_name, config2]
+                config2_results = results_dataset.loc[results_dataset['fitness_function'] == config2, metric]
+                performance1 = results.loc[dataset_name, config].values
+                performance2 = results.loc[dataset_name, config2].values
                 p_value = get_performance_difference_significance(config_results, config2_results)
                 sign = ''
                 
@@ -140,12 +155,11 @@ def get_performance_difference_significance_table(results, config, metric, pivot
 
 
 def get_slim_performance_difference_significance_table(results, metric):
-    slimmulsig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM*SIG1', 'GP', 'GSGP']) ], config='SLIM*SIG1_', metric = metric, pivot = True)
-    slimmulsig2 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM*SIG2', 'GP', 'GSGP']) ], config='SLIM*SIG2_', metric=metric, pivot=True)
-    slimplussig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM+SIG1', 'GP', 'GSGP']) ], config='SLIM+SIG1_', metric=metric, pivot = True)
-    slimplussig2 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM+SIG2', 'GP', 'GSGP']) ], config='SLIM+SIG2_', metric=metric, pivot=True)
     
-    df = pd.concat([slimmulsig1, slimmulsig2, slimplussig1, slimplussig2], axis =1)
+    slimplussig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM+SIG1', 'GP', 'GSGP']) ], config='SLIM+SIG1_', metric=metric, pivot = True)
+    slimmulsig1 = get_performance_difference_significance_table(results[results['name'].isin(['SLIM*SIG1', 'GP', 'GSGP']) ], config='SLIM*SIG1_', metric = metric, pivot = True)
+    
+    df = pd.concat([slimplussig1, slimmulsig1], axis =1)
     return df
 
 
@@ -156,9 +170,9 @@ def get_aggregated_performance(results, metric, agg='mean', algorithm=None, fitn
     results = filter_results(results, algorithm, fitness_function, ms)
     
     if agg == 'mean':
-        aggregated_performance = results.groupby(['dataset_name', 'config_settings', 'run_id'])[metric].mean().unstack().mean(axis=1).sort_values(ascending=False).unstack()
+        aggregated_performance = results.groupby(['dataset_name', 'config_id', 'run_id'])[metric].mean().unstack().mean(axis=1).sort_values(ascending=False).unstack()
     elif agg == 'median':
-        aggregated_performance = results.groupby(['dataset_name', 'config_settings', 'run_id'])[metric].median().unstack().median(axis=1).sort_values(ascending=False).unstack()
+        aggregated_performance = results.groupby(['dataset_name', 'config_id', 'run_id'])[metric].median().unstack().median(axis=1).sort_values(ascending=False).unstack()
     
     return aggregated_performance
 
@@ -349,7 +363,7 @@ def error_evolution_plot(logs):
     unique_datasets = logs['dataset'].unique()
 
     # Create subplots
-    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(10, 30), squeeze=False)
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(10, 15), squeeze=False)
 
     for i, dataset in enumerate(unique_datasets):
         dataset_logs = logs[logs['dataset'] == dataset]
@@ -360,6 +374,7 @@ def error_evolution_plot(logs):
 
     fig.tight_layout()
     plt.show()
+    return fig
 
 
 
@@ -378,26 +393,6 @@ def tree_size_evolution_plot(logs):
     fig.tight_layout()
     plt.show()
 
-
-# def generations_plot(logs, dataset_name, value):
-#     fig, axs = plt.subplots(1, 2, figsize=(12, 4))
-#     sns.lineplot
-
-
-def define_settings(results, setting_dict):
-    
-    keep = list(setting_dict.values())
-    keep.append('config_id')    
-    settings = results[keep].drop_duplicates().sort_values('config_id')
-    
-    settings['config_settings'] = ''
-    for key, value in setting_dict.items():
-        for row in settings.iterrows():
-            settings.loc[row[0], 'config_settings'] += f"{key}{row[1][value]}_"
-    
-    settings = settings[['config_id', 'config_settings']]
-    results = results.merge(settings, on='config_id')
-    return results
 
 
 def get_anova_table(results, metric):
@@ -473,7 +468,7 @@ def get_logs(experiment, dataset_name, add_columns=True):
     logs = pd.concat(logs, ignore_index=True)
     if add_columns:
         logs.columns = ['algorithm', 'id', 'dataset', 'seed', 'generation', 'elite_train_error', 'time', 'population_nodes', 'elite_test_error', 'elite_nodes', 'log_level', 'config_id']
-    
+    logs['dataset'] = logs['dataset'].str.capitalize()
     return logs
 
 def get_all_logs(experiment):
@@ -555,42 +550,492 @@ def plot_value_by_generations(logs, value, ax, y_max=None):
 
 
 
+
+def get_min_euclidian_distance(results):
+    unique_datasets = results['dataset_name'].unique()
+    unique_models = results['name'].unique()
+    
+    best_configs = []
+    
+    for dataset in unique_datasets:
+        for model in unique_models:
+            subset = results[(results['dataset_name'] == dataset) & (results['name'] == model)]
+            scaler = MinMaxScaler()
+            scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
+            subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
+            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5
+
+            subset = subset.sort_values('euclidian_distance')
+            subset = subset.drop_duplicates(subset=['dataset_name', 'name'], keep='first')
+            best_configs.append(subset)
+    
+    return pd.concat(best_configs, ignore_index=True)
+
+
+
+def get_best_config(filtered_results, metric, minimization):
+
+    # Step 1: median of all runs per config
+    median_per_config = (
+        filtered_results
+        .groupby('config_id')[metric]
+        .median()  # median across run_ids
+        .reset_index()
+    )
+
+    # Step 2: select best config based on minimization or maximization
+    best_config = (
+        median_per_config
+        .sort_values(by=metric, ascending=minimization)
+        .iloc[0]
+    )
+
+    return best_config
+
+
+
+def get_best_config_by_fitness_function(results):
+    best_configs = []
+    
+    for dataset in results['dataset_name'].unique():
+        filtered_by_dataset = results.loc[results['dataset_name'] == dataset]
+        
+        for ff in results['config.fitness_function'].unique():
+            filtered_by_ff = filtered_by_dataset.loc[filtered_by_dataset['config.fitness_function'] == ff]
+            
+            if ff == 'sigmoid_rmse':
+                best_config = get_best_config(filtered_by_ff, 'test.rmse', minimization=True)
+                
+            elif ff == 'weighted_sigmoid_rmse':
+                best_config = get_best_config(filtered_by_ff, 'test.wrmse', minimization=True)
+            
+            elif ff == 'accuracy':
+                best_config = get_best_config(filtered_by_ff, 'test.accuracy', minimization=False)
+            
+            elif ff == 'f1_score':
+                best_config = get_best_config(filtered_by_ff, 'test.f1_score', minimization=False)
+
+            else:
+                raise ValueError(f"Unknown fitness function: {ff}")
+            
+            best_configs.append([dataset, ff, best_config['config_id']])
+
+    best_configs_df = pd.DataFrame(best_configs, columns=['dataset_name', 'fitness_function', 'config_id'])
+    return best_configs_df
+
+
+
+
+def plot_performance_barplot(results_median, metrics, groupby, palette):
+
+    # Melt the DataFrame to long format
+    df_long = results_median.melt(
+        id_vars=['dataset_name', groupby],
+        value_vars= metrics,
+        var_name='metric',
+        value_name='value'
+    )
+
+    unique_datasets = df_long['dataset_name'].unique()
+    n_cols = 2
+    n_rows = math.ceil(len(unique_datasets) / n_cols)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(8, 2 * n_rows), squeeze=False)
+
+    # Plot each dataset
+    for idx, dataset in enumerate(unique_datasets):
+        i, j = divmod(idx, n_cols)
+        ax = axes[i, j]
+        
+        subset = df_long[df_long['dataset_name'] == dataset]
+        
+        sns.barplot(
+            data=subset,
+            x='metric',
+            y='value',
+            hue= groupby,
+            palette=palette,
+            ax=ax
+        )
+        
+        ax.set_title(dataset)
+        ax.set_xlabel("Evaluation Metric")
+        ax.set_ylabel("Test Score")
+        ax.tick_params(axis='x')
+        ax.legend_.remove()
+        ax.set_ylim(0, 1)
+        ax.set_yticks(np.arange(0, 1.1, 0.2))
+    for k in range(len(unique_datasets), n_rows * n_cols):
+        i, j = divmod(k, n_cols)
+        fig.delaxes(axes[i, j])
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_performance_evolution_by_fitness_function(logs):
+    unique_datasets = logs['dataset'].unique()
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 10), squeeze=False)
+
+    for i, dataset in enumerate(unique_datasets):
+        subset = logs[logs['dataset'] == dataset]
+        grouped = subset.groupby(['config_id', 'generation', 'fitness_function'])[['elite_test_error', 'elite_train_error']].median().reset_index()
+        grouped.loc[grouped['fitness_function'].isin(['sigmoid_rmse', 'weighted_sigmoid_rmse']), 
+            ['elite_test_error', 'elite_train_error']] = 1 - grouped[['elite_test_error', 'elite_train_error']]
+        
+        sns.lineplot(
+            data=grouped,
+            x='generation',
+            y='elite_train_error',
+            hue='fitness_function',
+            ax = ax[i, 0],
+        )
+        ax[i,0].set_title(dataset)
+        ax[i,0].set_xlabel("Generation")
+        ax[i,0].set_ylabel("Train Score")
+        ax[i,0].set_yticks(np.arange(0.4, 1.1, 0.1))
+        ax[i,0].set_ylim(0.5, 1.01)
+        sns.lineplot(
+            data=grouped,
+            x='generation',
+            y='elite_test_error',
+            hue='fitness_function',
+            ax = ax[i, 1],
+        )
+        ax[i,1].set_title(dataset)
+        ax[i,1].set_xlabel("Generation")
+        ax[i,1].set_ylabel("Test Score")
+        ax[i,1].set_yticks(np.arange(0, 1.1, 0.1))
+        ax[i,1].set_ylim(0, 1)
+        
+    for ax in fig.axes:
+        legend = ax.get_legend()
+        if legend:
+            legend.remove()
+
+    fig.tight_layout() 
+
+    plt.show()
+
+
+def plot_tree_size_evolution_by_fitness_function(logs):
+    unique_datasets = logs['dataset'].unique()
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(10, 2 * int(len(unique_datasets)/2)), squeeze=False)
+
+    i=0
+    j=0
+    for dataset in unique_datasets:
+        subset = logs[logs['dataset'] == dataset]
+        grouped = subset.groupby(['config_id', 'generation', 'fitness_function'])[['elite_nodes']].median().reset_index()
+        sns.lineplot(
+            data=grouped,
+            x='generation',
+            y='elite_nodes',
+            hue='fitness_function',
+            ax = ax[i, j],
+        )
+        ax[i,j].set_title(dataset)
+        ax[i,j].set_xlabel("Generation")
+        ax[i,j].set_ylabel("Tree Size")
+        ax[i,j].set_yticks(np.arange(0, 6000, 1000))
+        ax[i,j].set_ylim(0, 5000)
+        
+        j = (j + 1) % 2
+        i = i +1 if j == 0 else i
+        
+        
+    for ax in fig.axes:
+        legend = ax.get_legend()
+        if legend:
+            legend.remove()
+
+    fig.tight_layout() 
+
+    plt.show()
+
+def plot_performance_by_p_inflate_with_ms(results,  colors_dict=None):
+    unique_datasets = results['dataset_name'].unique()
+    fig, ax = plt.subplots(len(unique_datasets), 2,  figsize=(10, 3 * int(len(unique_datasets)/2)), squeeze=False)
+    
+    for i, dataset in enumerate(unique_datasets):
+
+        subset = results[results['dataset_name'] == dataset]
+
+        sns.lineplot(
+            data=subset,
+            x='config.p_inflate',
+            y='train.rmse',
+            hue='config.ms_upper',
+            style='name',
+            markers=True,
+            dashes=True,
+            palette = 'Set1',
+            ax=ax[i, 0]
+        )
+        ax[i, 0].set_title(f'{dataset}')
+        ax[i, 0].set_xlabel('config.p_inflate')
+        ax[i, 0].set_ylabel('Train Score')
+        ax[i, 0].yaxis.set_major_locator(ticker.LinearLocator(3))
+        ax[i, 0].legend_.remove()
+        
+        sns.lineplot(
+            data=subset,
+            x='config.p_inflate',
+            y='test.rmse',
+            hue='config.ms_upper',
+            style='name',
+            markers=True,
+            dashes=True,
+            palette = 'Set1',
+            ax=ax[i, 1]
+        )
+        ax[i, 1].set_title(f'{dataset}')
+        ax[i, 1].set_xlabel('Inflationrate')
+        ax[i, 1].set_ylabel('Test Score')
+        ax[i, 1].yaxis.set_major_locator(ticker.LinearLocator(3))
+        ax[i, 1].legend_.remove()
+
+    fig.tight_layout()
+    plt.show()
+
+def plot_tree_size_by_p_inflate_with_ms(results,  colors_dict=None):
+    
+    unique_datasets = results['dataset_name'].unique()
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(10, 1.5 * int(len(unique_datasets)/2)), squeeze=False)
+    
+    i=j=0
+    for dataset in unique_datasets:
+        subset = results[results['dataset_name'] == dataset]
+        sns.lineplot(
+            data=subset,
+            x='config.p_inflate',
+            y='nodes_count',
+            hue='config.ms_upper',
+            style='name',
+            markers=True,
+            dashes=True,
+            palette = 'Set1',
+            ax=ax[i, j]
+        )
+        ax[i, j].set_title(f'{dataset}')
+        ax[i, j].set_xlabel('Inflationrate')
+        ax[i, j].set_ylabel('Tree Size')
+        ax[i, j].yaxis.set_major_locator(ticker.LinearLocator(3))
+        ax[i, j].legend_.remove()
+        
+        j = (j + 1) % 2
+        i = i +1 if j == 0 else i
+        
+        
+    # for ax in fig.axes:
+    #     legend = ax.get_legend()
+    #     if legend:
+    #         legend.remove()
+
+    fig.tight_layout()
+    plt.show()
+
+def plot_performance_complexity_tradeoff(results, model):
+    unique_datasets = results['dataset_name'].unique()
+
+    fig, axes = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(10, 3 * int(len(unique_datasets)/2)))
+    axes = axes.flatten()
+    for i, dataset in enumerate(unique_datasets):
+        subset = results[results['dataset_name'] == dataset]
+        subset = subset[subset['name'] == model]
+        ax = axes[i]
+        sns.scatterplot(
+            data=subset,
+            x='nodes_count',
+            y='test.rmse',
+            hue='config.p_inflate',
+            #size= 'config.p_inflate',
+            size= 'config.ms_upper',
+            palette = 'Set1',
+            ax=ax
+        )
+        #ax.axvline(x=1000, color='black', linestyle='--')
+        ax.set_title(f"{dataset}")
+        ax.set_xlabel("Tree Size")
+        ax.set_ylabel("Test Score")
+        ax.legend(loc='best', fontsize='small', title='Config', bbox_to_anchor=(1.05, 1), borderaxespad=0.)
+
+    # Hide any unused subplots
+    # for j in range(i + 1, len(axes)):
+    #     fig.delaxes(axes[j])
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_ranks(wtl_agg, groupby):
+    fig, ax = plt.subplots(figsize=(8, 5))
+    sns.lineplot(data=wtl_agg, x='metric', y='rank', hue=groupby, marker='o', ax=ax)
+    ax.invert_yaxis()
+    ax.set_xlabel('Metric')
+    ax.set_ylabel('Rank')
+    ax.set_title('Rankings of Configurations')
+    plt.show()
+
+
+
+def get_friedman_rank_pvalues(wtl_detailed, groupby):
+    p_values = []
+    for metric in wtl_detailed['metric'].unique():
+        performances = []
+        for group in wtl_detailed[groupby].unique():
+            performances.append(wtl_detailed[(wtl_detailed[groupby] == group) & (wtl_detailed['metric'] == metric)]['rank'].values)
+
+        p_value = stats.friedmanchisquare(*performances).pvalue
+        
+        if p_value < 0.05:
+            sig = 'True'
+        else:
+            sig = 'False'
+        
+        p_values.append([metric, p_value, sig])
+    
+    return pd.DataFrame(p_values, columns=['metric', 'p_value', 'significant'])
+
+
+def get_wilcoxon_rank_pvalues(wtl_detailed, groupby):
+    from itertools import product
+    p_values = []
+    unique_groups = wtl_detailed[groupby].unique()
+    unique_pairs = [(x, y) for x, y in product(unique_groups, repeat=2) if x != y]
+    for metric in wtl_detailed['metric'].unique():
+        
+        for pair in unique_pairs:
+            group1 = pair[0]
+            group2 = pair[1]
+            
+            performances = []
+            performances.append(wtl_detailed[(wtl_detailed[groupby] == group1) & (wtl_detailed['metric'] == metric)]['rank'].values)
+            performances.append(wtl_detailed[(wtl_detailed[groupby] == group2) & (wtl_detailed['metric'] == metric)]['rank'].values)
+
+            p_value = stats.wilcoxon(*performances).pvalue
+            if p_value < 0.05:
+                sig = 'True'
+            else:
+                sig = 'False'
+            
+            p_values.append([metric, group1, group2, p_value, sig])
+    
+    return pd.DataFrame(p_values, columns=['metric', f'{groupby}_1', f'{groupby}_2',  'p_value', 'significant'])
+
+
+
+def get_win_tie_loss(results, metrics, minimization, groupby):
+    wtl_1v1 = []
+    memory = []
+    unique_datasets = results['dataset_name'].unique()
+    unique_groupby = results[groupby].unique()
+    
+    for dataset in unique_datasets:
+        subset = results[results['dataset_name'] == dataset]
+        
+        for config_id1 in subset['config_id'].unique():       
+            
+            for metric in metrics:
+                
+                for config_id2 in list( set(subset['config_id'].unique()) - set([config_id1])):
+                    if [dataset, metric, config_id1, config_id2] in memory:
+                        continue
+                    
+                    win = tie = loss = 0
+                    
+                    performance1 = subset[subset['config_id'] == config_id1][metric].values
+                    performance2 = subset[subset['config_id'] == config_id2][metric].values
+                    
+                    if np.all(performance1 == performance2):
+                        p_value = 1.0
+                    
+                    else:
+                        p_value = stats.wilcoxon(performance1, performance2).pvalue
+
+                    if p_value >= 0.05:
+                        tie = 1
+                        
+                    else:
+                        if np.median(performance1) > np.median(performance2):
+                            if minimization:
+                                loss = 1
+                                
+                            else:
+                                win = 1
+                        else:
+                            if minimization:
+                                win = 1
+                            else:
+                                loss = 1
+                    
+                    memory.append([dataset, metric, config_id1, config_id2])
+                    memory.append([dataset, metric, config_id2, config_id1])
+
+                    wtl_1v1.append([dataset, config_id1, config_id2, metric, p_value, win, tie, loss])
+                            
+    wtl_1v1_df = pd.DataFrame(wtl_1v1, columns=['dataset_name', 'config_id1', 'config_id2', 'metric', 'p_value', 'win', 'tie', 'loss'])
+    wtl_1v1_df = pd.merge(wtl_1v1_df, results[['dataset_name', 'config_id', groupby]].drop_duplicates().reset_index(drop=True),
+                  left_on=['dataset_name', 'config_id1'], right_on=['dataset_name', 'config_id'], how='left')
+    wtl_1v1_df.rename(columns={groupby: f'{groupby}_1'}, inplace=True)
+    wtl_1v1_df = pd.merge(wtl_1v1_df, results[['dataset_name', 'config_id', groupby]].drop_duplicates().reset_index(drop=True),
+                    left_on=['dataset_name', 'config_id2'], right_on=['dataset_name', 'config_id'], how='left')
+    wtl_1v1_df.rename(columns={groupby: f'{groupby}_2'}, inplace=True)
+    wtl_1v1_df.drop(columns=['config_id1', 'config_id2', 'config_id_x', 'config_id_y'], inplace=True)
+    
+    wtl_comparison_1v1 = wtl_1v1_df.groupby(['metric',f'{groupby}_1', f'{groupby}_2'])[['win', 'tie', 'loss']].sum()
+    
+    
+    
+    c1 = wtl_1v1_df.groupby(['dataset_name', f'{groupby}_1', 'metric'])[['win', 'tie', 'loss']].sum().reset_index()
+    c2 = wtl_1v1_df.groupby(['dataset_name', f'{groupby}_2', 'metric'])[['win', 'tie', 'loss']].sum().reset_index().rename(columns={f'{groupby}_2': f'{groupby}_1', 'win': 'loss', 'loss':'win'})
+    wtl_detailed = pd.concat([c1, c2], axis=0).groupby(['dataset_name',f'{groupby}_1', 'metric'])[['win', 'tie', 'loss']].sum().reset_index()
+    wtl_detailed['sum'] = wtl_detailed['win'] + 0.5*wtl_detailed['tie']
+    wtl_detailed['rank'] = (wtl_detailed['sum'] - int(len(unique_groupby)-1)) * -1 + 1
+    
+    wtl_agg = wtl_detailed.groupby(['metric',f'{groupby}_1'])[['win', 'tie', 'loss','rank']].agg({'win': 'sum', 'tie': 'sum', 'loss': 'sum', 'rank': 'mean'}).reset_index()
+    wtl_agg.rename(columns={f'{groupby}_1': f'{groupby}'}, inplace=True)
+    wtl_detailed.rename(columns={f'{groupby}_1': f'{groupby}'}, inplace=True)
+    return wtl_comparison_1v1, wtl_detailed, wtl_agg 
+
+
 class Analysis():
     def __init__(
         self,
-        experiment_name,
-        settings_dict
-        
+        experiment_name
         ):
-        
-        self.results = define_settings(results=get_all_results(experiment_name), setting_dict=settings_dict)
+        self.results = get_all_results(experiment_name)
         self.logs = get_all_logs(experiment_name)
         self.experiment_name = experiment_name
-        
-    
-    def get_aggregated_performance(self, metric, agg='mean', algorithm=None, fitness_function=None):
-        return
-        
-    
-    
-    def get_ranks_by_metric(self):
-        ranks = {}
-        for metric in ['test.accuracy', 'test.f1_score', 'test.roc_auc']:
-            ranks[metric] = get_rankings(self.results, metric)
-
-        self.ranks_by_metric = ranks
-        return ranks
-    
-    
-    
-    def plot_value_by_generations_for_experiment(self, value):
-        grp = self.results.groupby(['config_settings', 'algorithm', 'dataset', 'generation'])[['elite_train_error', 'elite_test_error', 'elite_nodes']].median().reset_index()
-        sns.lineplot(data=grp.loc[(grp['dataset'] == 'blood') & (grp['config_id'] < 4)], x='generation', y='elite_train_error', hue='config_id')
-        plt.show()
-        
-        
-    
-    # def run():
-    #     if self.experiment_name == 'RQ1':
-    #         anova_table = get_anova_table(self.results, 'test.rmse')
-    #         return
+class FitnessAnalysis(Analysis):
+    def __init__(self, experiment_name):
+        super().__init__(experiment_name)
+        self.best_configs = get_best_config_by_fitness_function(self.results)
+        self.best_config_results = pd.merge(self.results, self.best_configs, on=['dataset_name', 'config_id'], how='inner')
+        self.best_config_results_median = self.best_config_results.groupby(['dataset_name', 'config_id', 'fitness_function'])[['test.rmse', 'test.accuracy', 'test.f1_score', 'test.roc_auc']].median().reset_index()
+        self.best_config_logs = pd.merge(self.logs, self.best_config_results_median[['dataset_name', 'config_id', 'fitness_function']], left_on=['dataset', 'config_id'], right_on=['dataset_name', 'config_id'], how='inner')
+        self.wtl_1v1, self.wtl_detailed, self.wtl_agg = get_win_tie_loss(self.best_config_results, ['test.accuracy', 'test.f1_score', 'test.roc_auc'], minimization=False, groupby='config.fitness_function')
+        self.wilcoxon_pvalues = get_wilcoxon_rank_pvalues(self.wtl_detailed, groupby='config.fitness_function')
+        self.friedman_pvalues = get_friedman_rank_pvalues(self.wtl_detailed, groupby='config.fitness_function')
+class InflationrateAnalysis(Analysis):
+    def __init__(self, experiment_name):
+        super().__init__(experiment_name)
+        self.results_median = self.results.groupby(['dataset_name', 'config_id', 'name', 'config.ms_upper', 'config.p_inflate'])[['train.rmse', 'test.rmse', 'nodes_count']].median().reset_index()
+        self.best_configs = get_min_euclidian_distance(self.results_median)
+        self.best_config_results = pd.merge(self.results, self.best_configs[['dataset_name', 'config_id']], on=['dataset_name', 'config_id'], how='inner')
+        self.best_config_results_median = self.best_config_results.groupby(['dataset_name', 'name', 'config_id', 'config.ms_upper', 'config.p_inflate'])[['test.rmse', 'test.accuracy', 'test.f1_score', 'test.roc_auc', 'nodes_count']].median().reset_index()
+        self.best_config_logs = pd.merge(self.logs, self.best_config_results_median[['dataset_name', 'config_id', 'config.ms_upper', 'config.p_inflate']], left_on=['dataset', 'config_id'], right_on=['dataset_name', 'config_id'], how='inner')
+class ComparisonAnalysis(Analysis):
+    def __init__(self, experiment_name):
+        super().__init__(experiment_name)
+        ana_fitness = FitnessAnalysis('fitness')
+        ana_inflate = InflationrateAnalysis('inflationrate')
+        self.results = pd.concat([self.results, ana_fitness.best_config_results[ana_fitness.best_config_results['config.fitness_function'] == 'sigmoid_rmse'], ana_inflate.best_config_results], axis=0).reset_index(drop=True)
+        self.results_median = self.results.groupby(['dataset_name', 'config_id', 'name'])[['test.rmse', 'nodes_count', 'test.accuracy', 'test.f1_score', 'test.roc_auc']].median().reset_index()
+        self.logs = pd.concat([self.logs, ana_fitness.best_config_logs[ana_fitness.best_config_logs['fitness_function'] == 'sigmoid_rmse'], ana_inflate.best_config_logs], axis=0).reset_index(drop=True)
+        self.wtl_1v1_max, self.wtl_detailed_max, self.wtl_agg_max = get_win_tie_loss(self.results, ['test.accuracy', 'test.f1_score', 'test.roc_auc'], minimization=False, groupby='name')
+        self.wtl_1v1_min, self.wtl_detailed_min, self.wtl_agg_min = get_win_tie_loss(self.results, ['test.rmse', 'nodes_count'], minimization=True, groupby='name')
+        self.wtl_1v1 = pd.concat([self.wtl_1v1_max.reset_index(), self.wtl_1v1_min.reset_index()], axis=0).reset_index(drop=True)
+        self.wtl_detailed = pd.concat([self.wtl_detailed_max, self.wtl_detailed_min], axis=0).reset_index(drop=True)
+        self.wtl_agg = pd.concat([self.wtl_agg_max, self.wtl_agg_min], axis=0).reset_index(drop=True)
+        self.wilcoxon_pvalues = get_wilcoxon_rank_pvalues(self.wtl_detailed, groupby='name')
+        self.friedman_pvalues = get_friedman_rank_pvalues(self.wtl_detailed, groupby='name')
