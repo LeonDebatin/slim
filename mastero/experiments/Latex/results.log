@@ -1,0 +1,274 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  24 APR 2025 16:06
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**c:/Users/leond/OneDrive/Desktop/MasterThesis/slim/mastero/experiments/Latex/results.tex
+(c:/Users/leond/OneDrive/Desktop/MasterThesis/slim/mastero/experiments/Latex/results.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\leond\LATEX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\leond\LATEX\tex/latex/base\size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (C:\Users\leond\LATEX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen141
+\lightrulewidth=\dimen142
+\cmidrulewidth=\dimen143
+\belowrulesep=\dimen144
+\belowbottomsep=\dimen145
+\aboverulesep=\dimen146
+\abovetopsep=\dimen147
+\cmidrulesep=\dimen148
+\cmidrulekern=\dimen149
+\defaultaddspace=\dimen150
+\@cmidla=\count195
+\@cmidlb=\count196
+\@aboverulesep=\dimen151
+\@belowrulesep=\dimen152
+\@thisruleclass=\count197
+\@lastruleclass=\count198
+\@thisrulewidth=\dimen153
+) (C:\Users\leond\LATEX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Users\leond\LATEX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (C:\Users\leond\LATEX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\leond\LATEX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (C:\Users\leond\LATEX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (C:\Users\leond\LATEX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen154
+\Gin@req@width=\dimen155
+) (C:\Users\leond\LATEX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count199
+\l__pdf_internal_box=\box51
+) (results.aux
+
+LaTeX Warning: Label `fig:performance' multiply defined.
+
+
+LaTeX Warning: Label `fig:ranks' multiply defined.
+
+
+LaTeX Warning: Label `fig:tree_size_evolution' multiply defined.
+
+)
+\openout1 = `results.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+ (C:\Users\leond\LATEX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count266
+\scratchdimen=\dimen156
+\scratchbox=\box52
+\nofMPsegments=\count267
+\nofMParguments=\count268
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count269
+\MPscratchDim=\dimen157
+\MPnumerator=\count270
+\makeMPintoPDFobject=\count271
+\everyMPtoPDFconversion=\toks19
+) (C:\Users\leond\LATEX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\leond\LATEX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+)) (Chapters/Figures/Results/comparison_performance.tex
+<../Latex/Chapters/Figures/Results/comparison_performance.png, id=1, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/comparison_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/comparison_performance_evolution.tex
+<../Latex/Chapters/Figures/Results/comparison_performance_evolution.png, id=3, 569.63214pt x 1060.05637pt>
+File: ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 642.02353pt.
+
+
+LaTeX Warning: Float too large for page by 115.96797pt on input line 7.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/comparison_ranks.tex
+<../Latex/Chapters/Figures/Results/comparison_ranks.png, id=4, 394.30511pt x 232.7094pt>
+File: ../Latex/Chapters/Figures/Results/comparison_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/comparison_tree_size_evolution.tex
+<../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png, id=5, 569.77669pt x 528.87186pt>
+File: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 320.2388pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/fitness_performance.tex
+<../Latex/Chapters/Figures/Results/fitness_performance.png, id=6, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/fitness_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/fitness_ranks.tex
+<../Latex/Chapters/Figures/Results/fitness_ranks.png, id=7, 394.30511pt x 232.85394pt>
+File: ../Latex/Chapters/Figures/Results/fitness_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.74669pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/fitness_tree_size_evolution.tex
+<../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png, id=8, 569.77669pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 427.45186pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/inflationrate_performance_by_p_inflate.tex
+<../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png, id=9, 570.49937pt x 1070.89687pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 647.625pt.
+
+
+LaTeX Warning: Float too large for page by 121.56944pt on input line 7.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.tex
+<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png, id=10, 570.64392pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.27458pt.
+
+
+LaTeX Warning: Float too large for page by 13.21902pt on input line 7.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.tex
+<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png, id=11, 570.49937pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.41069pt.
+
+
+LaTeX Warning: Float too large for page by 13.35513pt on input line 7.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.tex
+<../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png, id=12, 570.64392pt x 539.71236pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 326.30875pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (Chapters/Tables/Results/comparison_friedman.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 5.
+) (Chapters/Tables/Results/comparison_wtl.tex
+Overfull \hbox (43.66727pt too wide) in paragraph at lines 5--17
+ [][] 
+ []
+
+) (Chapters/Tables/Results/fitness_friedman.tex) (Chapters/Tables/Results/fitness_wtl.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [1
+
+{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3 <../Latex/Chapters/Figures/Results/comparison_performance.png>] [4 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [5 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [6 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [7 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [8 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [9 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [12 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [13 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1527 strings out of 474486
+ 34605 string characters out of 5755011
+ 1938542 words of memory out of 5000000
+ 23806 multiletter control sequences out of 15000+600000
+ 558069 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,8n,65p,420b,230s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/leond/LATEX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on results.pdf (13 pages, 6633630 bytes).
+PDF statistics:
+ 73 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+
