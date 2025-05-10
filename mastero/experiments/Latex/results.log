@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  24 APR 2025 16:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  10 MAY 2025 12:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -64,17 +64,7 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count199
 \l__pdf_internal_box=\box51
-) (results.aux
-
-LaTeX Warning: Label `fig:performance' multiply defined.
-
-
-LaTeX Warning: Label `fig:ranks' multiply defined.
-
-
-LaTeX Warning: Label `fig:tree_size_evolution' multiply defined.
-
-)
+) (results.aux)
 \openout1 = `results.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -110,165 +100,280 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\leond\LATEX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 )) (Chapters/Figures/Results/comparison_performance.tex
+
+Chapters/Figures/Results/comparison_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/comparison_performance.png, id=1, 570.49937pt x 705.93336pt>
 File: ../Latex/Chapters/Figures/Results/comparison_performance.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/comparison_performance.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_performance.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 426.91327pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/comparison_performance_evolution.tex
-<../Latex/Chapters/Figures/Results/comparison_performance_evolution.png, id=3, 569.63214pt x 1060.05637pt>
+
+Chapters/Figures/Results/comparison_performance_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/comparison_performance_evolution.png, id=3, 569.63214pt x 882.99486pt>
 File: ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_performance_evolution.png  used on input line 4.
-(pdftex.def)             Requested size: 345.0pt x 642.02353pt.
+(pdftex.def)             Requested size: 345.0pt x 534.78616pt.
 
-
-LaTeX Warning: Float too large for page by 115.96797pt on input line 7.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Float too large for page by 8.7306pt on input line 7.
 
 ) (Chapters/Figures/Results/comparison_ranks.tex
+
+Chapters/Figures/Results/comparison_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/comparison_ranks.png, id=4, 394.30511pt x 232.7094pt>
 File: ../Latex/Chapters/Figures/Results/comparison_ranks.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/comparison_ranks.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_ranks.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 203.62021pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/comparison_tree_size_evolution.tex
+
+Chapters/Figures/Results/comparison_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png, id=5, 569.77669pt x 528.87186pt>
 File: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 320.2388pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/fitness_performance.tex
+
+Chapters/Figures/Results/fitness_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/fitness_performance.png, id=6, 570.49937pt x 705.93336pt>
 File: ../Latex/Chapters/Figures/Results/fitness_performance.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_performance.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_performance.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 426.91327pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/fitness_ranks.tex
+
+Chapters/Figures/Results/fitness_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/fitness_ranks.png, id=7, 394.30511pt x 232.85394pt>
 File: ../Latex/Chapters/Figures/Results/fitness_ranks.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_ranks.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_ranks.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 203.74669pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/fitness_tree_size_evolution.tex
-<../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png, id=8, 569.77669pt x 705.93336pt>
+
+Chapters/Figures/Results/fitness_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png, id=8, 569.77669pt x 635.10876pt>
 File: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png  used on input line 4.
-(pdftex.def)             Requested size: 345.0pt x 427.45186pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(pdftex.def)             Requested size: 345.0pt x 384.56664pt.
 ) (Chapters/Figures/Results/inflationrate_performance_by_p_inflate.tex
-<../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png, id=9, 570.49937pt x 1070.89687pt>
+
+Chapters/Figures/Results/inflationrate_performance_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png, id=9, 570.49937pt x 820.40904pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png  used on input line 4.
-(pdftex.def)             Requested size: 345.0pt x 647.625pt.
-
-
-LaTeX Warning: Float too large for page by 121.56944pt on input line 7.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(pdftex.def)             Requested size: 345.0pt x 496.14244pt.
 ) (Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.tex
+
+Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png, id=10, 570.64392pt x 891.95634pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 539.27458pt.
 
-
 LaTeX Warning: Float too large for page by 13.21902pt on input line 7.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.tex
+
+Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png, id=11, 570.49937pt x 891.95634pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 539.41069pt.
 
-
 LaTeX Warning: Float too large for page by 13.35513pt on input line 7.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.tex
+
+Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png, id=12, 570.64392pt x 539.71236pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 326.30875pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (Chapters/Tables/Results/comparison_friedman.tex
+
+Chapters/Tables/Results/comparison_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 5.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 5.
 ) (Chapters/Tables/Results/comparison_wtl.tex
+
+Chapters/Tables/Results/comparison_wtl.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+
 Overfull \hbox (43.66727pt too wide) in paragraph at lines 5--17
  [][] 
  []
 
-) (Chapters/Tables/Results/fitness_friedman.tex) (Chapters/Tables/Results/fitness_wtl.tex
+) (Chapters/Tables/Results/fitness_friedman.tex
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Chapters/Tables/Results/fitness_friedman.tex:2: LaTeX Error: Unknown float option `H'.
 
-) [1
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
 
-{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3 <../Latex/Chapters/Figures/Results/comparison_performance.png>] [4 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [5 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [6 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [7 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [8 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [9 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [12 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [13 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
+) (Chapters/Tables/Results/fitness_wtl.tex
+
+Chapters/Tables/Results/fitness_wtl.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) [1{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../Latex/Chapters/Figures/Results/comparison_performance.png>] [2 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [3 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [4 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [5 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [6 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [7 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [8 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [9 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 1527 strings out of 474486
- 34605 string characters out of 5755011
- 1938542 words of memory out of 5000000
- 23806 multiletter control sequences out of 15000+600000
+ 1530 strings out of 474486
+ 34782 string characters out of 5755011
+ 1937542 words of memory out of 5000000
+ 23809 multiletter control sequences out of 15000+600000
  558069 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,8n,65p,420b,230s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/leond/LATEX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on results.pdf (13 pages, 6633630 bytes).
+Output written on results.pdf (11 pages, 6169409 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
+ 66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

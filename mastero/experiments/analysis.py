@@ -115,12 +115,13 @@ def table_to_latex(table, experiment, name, caption, index=False):
     )
 
     latex_code = f"""
-    \\begin{{table}}[h]
+    \\begin{{table}}[H]
         \\centering
         \\renewcommand{{\\arraystretch}}{{1.2}}
-    {latex_table}
         \\caption{{{caption}}}
         \\label{{tab:{experiment}_{name}}}
+    {latex_table}
+        
     \\end{{table}}
     """
     with open(f"../Latex/Chapters/Tables/Results/{experiment}_{name}.tex", "w") as f:
@@ -133,11 +134,11 @@ def plot_to_latex(figure, experiment, name, caption):
     figure.savefig(f"../Latex/Chapters/Figures/Results/{experiment}_{name}.png", dpi=500, bbox_inches='tight', transparent=True)
     
     latex_code = f"""
-    \\begin{{figure}}[h]
+    \\begin{{figure}}[H]
     \\centering
     \\includegraphics[width=\\linewidth]{{../Latex/Chapters/Figures/Results/{experiment}_{name}.png}}
     \\caption{{{caption}}}
-    \\label{{fig:{name}}}
+    \\label{{fig:{experiment}_{name}}}
     \\end{{figure}}
     """
     with open(f"../Latex/Chapters/Figures/Results/{experiment}_{name}.tex", "w") as f:
@@ -221,28 +222,6 @@ def get_all_logs(experiment):
 
 
 
-def get_min_euclidian_distance(results):
-    unique_datasets = results['dataset'].unique()
-    unique_models = results['algorithm'].unique()
-    
-    best_configs = []
-    
-    for dataset in unique_datasets:
-        for model in unique_models:
-            subset = results[(results['dataset'] == dataset) & (results['algorithm'] == model)]
-            scaler = MinMaxScaler()
-            scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
-            subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
-            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5
-
-            subset = subset.sort_values('euclidian_distance')
-            subset = subset.drop_duplicates(subset=['dataset', 'algorithm'], keep='first')
-            best_configs.append(subset)
-    
-    return pd.concat(best_configs, ignore_index=True)
-
-
-
 def get_best_config(filtered_results, metric, minimization):
 
     # Step 1: median of all runs per config
@@ -293,6 +272,43 @@ def get_best_config_by_fitness_function(results):
     best_configs_df = pd.DataFrame(best_configs, columns=['dataset', 'fitness_function', 'config_id'])
     return best_configs_df
 
+
+
+def get_best_config_performance_by_p_inflate_and_ms_upper(results):
+    best_configs = []
+    
+    for dataset in results['dataset'].unique():
+        filtered_by_dataset = results.loc[results['dataset'] == dataset]
+        
+        for algorithm in results['algorithm'].unique():
+            filtered_by_algorithm = filtered_by_dataset.loc[filtered_by_dataset['algorithm'] == algorithm]
+            best_config = get_best_config(filtered_by_algorithm, 'test.rmse', minimization=True)
+            
+            best_configs.append([dataset,  best_config['config_id']])
+
+    best_configs_df = pd.DataFrame(best_configs, columns=['dataset',  'config_id'])
+    return best_configs_df
+
+
+def get_min_euclidian_distance(results):
+    unique_datasets = results['dataset'].unique()
+    unique_models = results['algorithm'].unique()
+    
+    best_configs = []
+    
+    for dataset in unique_datasets:
+        for model in unique_models:
+            subset = results[(results['dataset'] == dataset) & (results['algorithm'] == model)]
+            scaler = MinMaxScaler()
+            scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
+            subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
+            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5
+
+            subset = subset.sort_values('euclidian_distance')
+            subset = subset.drop_duplicates(subset=['dataset', 'algorithm'], keep='first')
+            best_configs.append(subset)
+    
+    return pd.concat(best_configs, ignore_index=True)
 
 
 
@@ -365,7 +381,7 @@ def plot_performance_barplot(results_median, metrics, groupby):
 
 def plot_performance_evolution(logs):
     unique_datasets = logs['dataset'].unique()
-    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 3 * int(len(unique_datasets)/2)), squeeze=False)
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 2.5 * int(len(unique_datasets)/2)), squeeze=False)
 
     for i, dataset in enumerate(unique_datasets):
         dataset_logs = logs[logs['dataset'] == dataset]
@@ -497,7 +513,7 @@ def plot_performance_evolution_by_fitness_function(logs):
 
 def plot_tree_size_evolution_by_fitness_function(logs):
     unique_datasets = logs['dataset'].unique()
-    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(8, 2 * int(len(unique_datasets)/2)), squeeze=False)
+    fig, ax = plt.subplots(int(len(unique_datasets)/2), 2, figsize=(8, 1.8 * int(len(unique_datasets)/2)), squeeze=False)
 
     i=j=0
     for dataset in unique_datasets:
@@ -537,7 +553,7 @@ def plot_tree_size_evolution_by_fitness_function(logs):
 
 def plot_performance_by_p_inflate_with_ms(results):
     unique_datasets = results['dataset'].unique()
-    fig, ax = plt.subplots(len(unique_datasets), 2,  figsize=(8, 3 * int(len(unique_datasets)/2)), squeeze=False)
+    fig, ax = plt.subplots(len(unique_datasets), 2,  figsize=(8, 2.3 * int(len(unique_datasets)/2)), squeeze=False)
     
     for i, dataset in enumerate(unique_datasets):
 
@@ -706,7 +722,7 @@ def plot_performance_complexity_tradeoff(results, model):
         # axes[i].set_ylim(min, max)
         
     
-        axes[i].xaxis.set_major_locator(ticker.LinearLocator(4))
+        axes[i].xaxis.set_major_locator(ticker.LinearLocator(5))
         axes[i].xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"0" if x < 0 else f"{int(round(x, -2))}"))
         # min = subset['nodes_count'].min()- subset['nodes_count'].min() * 0.1
         # max = subset['nodes_count'].max()+ subset['nodes_count'].min() * 0.1
@@ -742,6 +758,9 @@ def plot_performance_complexity_tradeoff(results, model):
 
     return fig, axes
 
+
+
+    
 
 def plot_ranks(wtl_agg, groupby):
     fig, ax = plt.subplots(figsize=(6, 3))
@@ -947,7 +966,7 @@ class InflationrateAnalysis(Analysis):
     def __init__(self, experiment_name):
         super().__init__(experiment_name)
         self.results_median = self.results.groupby(['dataset', 'config_id', 'algorithm', 'config.ms_upper', 'config.p_inflate'])[['train.rmse', 'test.rmse', 'nodes_count']].median().reset_index()
-        self.best_configs = get_min_euclidian_distance(self.results_median)
+        self.best_configs = get_min_euclidian_distance(self.results_median) #best tradeoff between performance and complexity
         self.best_config_results = pd.merge(self.results, self.best_configs[['dataset', 'config_id']], on=['dataset', 'config_id'], how='inner')
         self.best_config_results_median = self.best_config_results.groupby(['dataset', 'algorithm', 'config_id', 'config.ms_upper', 'config.p_inflate'])[['test.rmse', 'test.accuracy', 'test.f1_score', 'test.roc_auc', 'nodes_count']].median().reset_index()
         self.best_config_logs = pd.merge(self.logs, self.best_config_results_median[['dataset', 'config_id', 'config.ms_upper', 'config.p_inflate']], left_on=['dataset', 'config_id'], right_on=['dataset', 'config_id'], how='inner')
@@ -955,12 +974,67 @@ class InflationrateAnalysis(Analysis):
         self.tree_size_by_p_inflate_plot = plot_tree_size_by_p_inflate_with_ms(self.results_median)
         self.performance_complexity_tradeoff_plussig1_plot = plot_performance_complexity_tradeoff(self.results_median, 'SLIM+SIG1')
         self.performance_complexity_tradeoff_mulsig1_plot = plot_performance_complexity_tradeoff(self.results_median, 'SLIM*SIG1')
+        self.tradeoff_table = self.get_tradeoff_table()
         
+        table_to_latex(self.tradeoff_table, experiment_name, 'tradeoff', 'Tradeoff between Performance and Complexity', index=False)
         plot_to_latex(self.performance_by_p_inflate_plot[0], experiment_name, 'performance_by_p_inflate', 'Performance by Inflationrate') #figure, experiment, name, caption
         plot_to_latex(self.tree_size_by_p_inflate_plot[0], experiment_name, 'tree_size_by_p_inflate', 'Tree Size by Inflationrate') #figure, experiment, name, caption
         plot_to_latex(self.performance_complexity_tradeoff_plussig1_plot[0], experiment_name, 'performance_complexity_tradeoff_plussig1', 'Performance-Complexity-Tradeoff SLIM+SIG1') #figure, experiment, name, caption
         plot_to_latex(self.performance_complexity_tradeoff_mulsig1_plot[0], experiment_name, 'performance_complexity_tradeoff_mulsig1', 'Performance-Complexity-Tradeoff SLIM*SIG1') #figure, experiment, name, caption
+
         
+    def get_tradeoff_table(self):
+        #best by performance
+        best_perf = get_best_config_performance_by_p_inflate_and_ms_upper(self.results)
+        best_perf = pd.merge(best_perf, self.results_median[['config_id', 'config.p_inflate', 'config.ms_upper', 'dataset', 'algorithm', 'test.rmse', 'nodes_count']], on=['config_id', 'dataset'], how='left')
+        best_perf = best_perf[['dataset', 'algorithm', 'config.p_inflate', 'config.ms_upper', 'test.rmse', 'nodes_count']].copy()
+        best_perf['test.rmse'] = best_perf['test.rmse'].round(5)
+        
+        #best by tradeoff
+        best_trade = self.best_config_results_median[['dataset', 'algorithm', 'config.p_inflate', 'config.ms_upper', 'test.rmse',  'nodes_count']].copy()
+        best_trade['test.rmse'] = best_trade['test.rmse'].round(5)
+
+        #calc percentage
+        best = pd.merge(best_perf, best_trade,  on=['dataset', 'algorithm'], how='left')
+        best['rmse_percentage'] = ((best['test.rmse_y'] - best['test.rmse_x']) / best['test.rmse_x']) * 100
+        best['rmse_percentage'] = '+' + best['rmse_percentage'].round(1).astype('str') + '%'
+        best['nodes_count_percentage'] = (best['nodes_count_y'] -best['nodes_count_x'] ) / best['nodes_count_x'] * 100
+        best['nodes_count_percentage'] = best['nodes_count_percentage'].round(1).astype('str') + '%'
+        
+        # Multicolumns
+        best = best[[
+            'dataset', 'algorithm',
+            'config.p_inflate_x', 'config.p_inflate_y',
+            'config.ms_upper_x', 'config.ms_upper_y',
+            'test.rmse_x', 'test.rmse_y','rmse_percentage',
+            'nodes_count_x', 'nodes_count_y', 'nodes_count_percentage'
+        ]]
+        multi_cols = pd.MultiIndex.from_tuples([
+            ('dataset', ''), ('algorithm', ''),
+            ('config.p_inflate', ' R'), ('config.p_inflate', ' T'),
+            ('config.ms_upper', ' R'), ('config.ms_upper', ' T'),
+            ('test.rmse', ' R'), ('test.rmse', ' T'),
+            ('rmse_percentage', ''), ('nodes_count', ' R'),
+            ('nodes_count', ' T'), ('nodes_count_percentage', '')
+            
+        ])
+        
+        best.columns = multi_cols
+        best.rename(columns={
+                            'dataset': 'Dataset',
+                            'algorithm': 'Version',
+                            'config.p_inflate': 'Inflationrate',
+                            'config.ms_upper': 'Upper MS',
+                            'test.rmse': 'RMSE',
+                            'nodes_count': 'Tree Size',
+                            'rmse_percentage': 'RMSE %',
+                            'nodes_count_percentage': 'Tree Size %'
+                        }, inplace=True)
+
+        best = best.applymap(lambda x: round(x, 4) if isinstance(x, float) else x)
+
+        return best
+                
         
         
 class ComparisonAnalysis(Analysis):
