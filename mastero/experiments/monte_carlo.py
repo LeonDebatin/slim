@@ -55,7 +55,7 @@ class MonteCarlo():
             if self.log:
                 config_counter = config_counter + 1
             
-            for i in range(9, self.n_runs+1, 1):
+            for i in range(1, self.n_runs+1, 1):
                 
                 if self.log:
                     config_id = config_counter
@@ -71,13 +71,14 @@ class MonteCarlo():
                 X_train, y_train, X_test, y_test = return_train_test(
                                                                         df = self.data, 
                                                                         train_indices = train_indices, 
-                                                                        test_indices = test_indices, 
+                                                                        test_indices = test_indices,
+                                                                        scaling = model_config['scaling'],
                                                                         oversampling = model_config['oversampling'], 
                                                                         categoricals = self.data_info.loc[self.data_info['name']== self.dataset_name, 'categoricals'].values[0]
                                                                     )
 
                 update_sample_weights(y_train, y_test)
-                
+
                 best_individual = train_model(
                                                 dataset_name = self.dataset_name, 
                                                 X_train = X_train, 

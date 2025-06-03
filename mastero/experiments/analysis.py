@@ -457,19 +457,21 @@ def plot_tree_size_evolution(logs):
 
 def plot_performance_evolution_by_fitness_function(logs):
     unique_datasets = logs['dataset'].unique()
-    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 2 * int(len(unique_datasets)/2)), squeeze=False)
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 10 * int(len(unique_datasets)/2)), squeeze=False)
 
     for i, dataset in enumerate(unique_datasets):
         subset = logs[logs['dataset'] == dataset]
         grouped = subset.groupby(['config_id', 'generation', 'fitness_function'])[['elite_test_error', 'elite_train_error']].median().reset_index()
-        grouped.loc[grouped['fitness_function'].isin(['sigmoid_rmse', 'weighted_sigmoid_rmse']), 
-            ['elite_test_error', 'elite_train_error']] = 1 - grouped[['elite_test_error', 'elite_train_error']]
+        mask = grouped['fitness_function'].isin(['RMSE', 'WRMSE'])
+        grouped.loc[mask, ['elite_test_error', 'elite_train_error']] = 1 - grouped.loc[mask, ['elite_test_error', 'elite_train_error']]
+
         
         sns.lineplot(
             data=grouped,
             x='generation',
             y='elite_train_error',
             hue='fitness_function',
+            palette = colors['fitness_function'],
             ax = ax[i, 0],
         )
         ax[i,0].set_title(dataset)
@@ -478,25 +480,39 @@ def plot_performance_evolution_by_fitness_function(logs):
         ax[i,0].set_yticks(np.arange(0.4, 1.1, 0.1))
         ax[i,0].set_ylim(0.5, 1.01)
         ax[i,0].legend_.remove()
-        ax[i, 0].spines['right'].set_visible(False)
-        ax[i, 0].spines['top'].set_visible(False)
+        ax[i,0].spines['right'].set_visible(False)
+        ax[i,0].spines['top'].set_visible(False)
+        ax[i,0].yaxis.set_major_locator(ticker.LinearLocator(4))
+        ax[i,0].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.2f}"))
+        min = grouped['elite_train_error'].min() - grouped['elite_train_error'].min() * 0.1
+        max = grouped['elite_train_error'].max() + grouped['elite_train_error'].min() * 0.1
+        max = 1.0 if max > 1.0 else max
+        ax[i,0].set_ylim(min, max)
+        
+        
         
         sns.lineplot(
             data=grouped,
             x='generation',
             y='elite_test_error',
             hue='fitness_function',
+            palette = colors['fitness_function'],
             ax = ax[i, 1],
         )
         ax[i,1].set_title(dataset)
         ax[i,1].set_xlabel("Generation")
         ax[i,1].set_ylabel("Test Score")
         ax[i,1].set_yticks(np.arange(0, 1.1, 0.1))
-        ax[i,1].set_ylim(0, 1)
+        ax[i,1].set_ylim(0.5, 1)
         ax[i,1].legend_.remove()
-        ax[i, 0].spines['right'].set_visible(False)
-        ax[i, 0].spines['top'].set_visible(False)
-        
+        ax[i,1].spines['right'].set_visible(False)
+        ax[i,1].spines['top'].set_visible(False)
+        ax[i,1].yaxis.set_major_locator(ticker.LinearLocator(4))
+        ax[i,1].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.2f}"))
+        min = grouped['elite_test_error'].min() - grouped['elite_test_error'].min() * 0.1
+        max = grouped['elite_test_error'].max() + grouped['elite_test_error'].min() * 0.1
+        max = 1.0 if max > 1.0 else max
+        ax[i,1].set_ylim(min, max)
         
     handles, labels = ax[0,0].get_legend_handles_labels()
     fig.legend(
@@ -508,7 +524,7 @@ def plot_performance_evolution_by_fitness_function(logs):
     )
     plt.tight_layout(rect=[0, 0.05, 1, 1]) 
 
-    plt.show()
+    return fig, ax
 
 
 def plot_tree_size_evolution_by_fitness_function(logs):
@@ -955,6 +971,8 @@ class FitnessAnalysis(Analysis):
         self.performance_plot = plot_performance_barplot(self.best_config_results_median.rename(columns= {'test.accuracy': 'Accuracy', 'test.f1_score': 'F1-Score', 'test.roc_auc': 'ROC-AUC'}), ['Accuracy', 'F1-Score', 'ROC-AUC'], groupby='fitness_function')
         self.best_config_logs['fitness_function'] = self.best_config_logs['fitness_function'].replace({'sigmoid_rmse': 'RMSE', 'weighted_sigmoid_rmse': 'WRMSE', 'accuracy': 'Accuracy', 'f1_score': 'F1-Score'})
         self.tree_size_evolution_plot = plot_tree_size_evolution_by_fitness_function(self.best_config_logs)
+        self.performance_evolution_plot = plot_performance_evolution_by_fitness_function(self.best_config_logs)
+        
         table_to_latex(self.friedman_pvalues, experiment_name, 'friedman', 'p-Values of the Friedman Test', index=False)
         table_to_latex(self.wtl_1v1, experiment_name, 'wtl', 'Win Tie Loss', index=False)
         plot_to_latex(self.ranks_plot[0], experiment_name, 'ranks', 'Ranks by Fitness Function') #figure, experiment, name, caption

@@ -25,11 +25,12 @@ basic_config_all = {
 
 basic_config_gp = {
     'p_xo': 0.8,
-    'max_depth': 20
+    'max_depth': 17
 }
 
 basic_model_config_gp = {
                         'name': 'gp',
+                        'scaling': None,
                         'oversampling': None,
                          'config': {**basic_config_all, **basic_config_gp}
                         }
@@ -43,6 +44,7 @@ basic_config_gsgp = {
 
 basic_model_config_gsgp = {
                         'name': 'gsgp',
+                        'scaling': None,
                         'oversampling': None,
                          'config': {**basic_config_all, **basic_config_gsgp}
                         }
@@ -59,6 +61,7 @@ basic_config_slim= {
 
 basic_model_config_slim = {
                         'name': 'slim',
+                        'scaling': None,
                         'oversampling': None,
                          'config': {**basic_config_all, **basic_config_slim}
                         }

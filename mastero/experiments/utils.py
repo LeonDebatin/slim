@@ -11,6 +11,7 @@ from slim_gsgp.main_gsgp import gsgp
 from slim_gsgp.evaluators.fitness_functions import *
 import slim_gsgp.evaluators.fitness_functions
 from imblearn.over_sampling import SMOTENC, SMOTE, SMOTEN
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 
 
@@ -41,14 +42,27 @@ def oversample(df, categoricals = []):
     
     return pd.concat([X,y], axis = 1)
 
+def scale(train, test):
+    scaler = StandardScaler()
+    features = train.columns.difference(['target'])
+    
+    train.loc[:, features] = scaler.fit_transform(train[features])
+    test.loc[:, features] = scaler.transform(test[features])
+    
+    return train, test
 
-def return_train_test(df, train_indices, test_indices, oversampling = False, categoricals = []):
+
+
+def return_train_test(df, train_indices, test_indices, scaling, oversampling = False, categoricals = []):
     
     train = df.iloc[train_indices]
     test = df.iloc[test_indices]
     
+    if scaling:
+        train, test = scale(train, test)
+    
     if oversampling:
-        train = oversample(df, categoricals)
+        train = oversample(train, categoricals)
     
     X_train, y_train = load_pandas_df(train, X_y=True)
     X_test, y_test = load_pandas_df(test, X_y=True)
@@ -143,7 +157,8 @@ def get_evaluation_dictionary(y_true, y_pred):
 
 
 
-def fill_config(model_config, oversampling, fitness_function, minimization, inflation_rate, ms_upper):
+def fill_config(model_config, scaling, oversampling, fitness_function, minimization, inflation_rate, ms_upper):
+    model_config['scaling'] = scaling
     model_config["oversampling"] = oversampling
     model_config['config']["fitness_function"] = fitness_function
     model_config['config']["minimization"] = minimization
