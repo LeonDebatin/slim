@@ -43,9 +43,9 @@ class MonteCarlo():
             if not os.path.exists(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}'):
                 os.makedirs(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}')
 
-            # with open(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}/results.csv', mode="w", newline="") as file:
-            #     writer = csv.writer(file)
-            #     writer.writerow(["config_id", "run_id", "config", "metrics", "nodes_count"])
+            with open(f'{self.data_filepath}results/{self.experiment_name}/{self.dataset_name}/results.csv', mode="w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(["config_id", "run_id", "config", "metrics", "nodes_count"])
             
             config_counter = self.config_counter_start
         
