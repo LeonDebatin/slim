@@ -42,12 +42,12 @@ def oversample(df, categoricals = []):
     
     return pd.concat([X,y], axis = 1)
 
-def scale(train, test):
+def scale(train, test, categoricals):
     scaler = StandardScaler()
-    features = train.columns.difference(['target'])
+    features = list(set(train.columns) - set(categoricals) - {'target'})
     
-    train.loc[:, features] = scaler.fit_transform(train[features])
-    test.loc[:, features] = scaler.transform(test[features])
+    train.loc[:, features] = scaler.fit_transform(train[features]).astype(float)
+    test.loc[:, features] = scaler.transform(test[features]).astype(float)
     
     return train, test
 
@@ -59,7 +59,7 @@ def return_train_test(df, train_indices, test_indices, scaling, oversampling = F
     test = df.iloc[test_indices]
     
     if scaling:
-        train, test = scale(train, test)
+        train, test = scale(train, test, categoricals)
     
     if oversampling:
         train = oversample(train, categoricals)
