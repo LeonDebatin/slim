@@ -56,22 +56,6 @@ def scale(train, test, categoricals):
     return train, test
 
 
-# def scale(train, test, categoricals):
-#     scaler = StandardScaler()
-    
-#     # Determine features (excluding categoricals and 'target')
-#     features = list(set(train.columns) - set(categoricals) - {'target'})
-    
-#     # Convert features in train and test to float64 to ensure compatibility
-#     train[features] = train[features].apply(pd.to_numeric, errors='coerce')
-#     test[features] = test[features].apply(pd.to_numeric, errors='coerce')
-    
-#     # Apply StandardScaler
-#     train[features] = scaler.fit_transform(train[features])
-#     test[features] = scaler.transform(test[features])
-    
-#     return train, test
-
 
 
 def return_train_test(df, train_indices, test_indices, scaling, oversampling = False, categoricals = []):
