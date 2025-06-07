@@ -46,8 +46,11 @@ def scale(train, test, categoricals):
     scaler = StandardScaler()
     features = list(set(train.columns) - set(categoricals) - {'target'})
     
-    train.loc[:, features] = scaler.fit_transform(train[features]).astype(float)
-    test.loc[:, features] = scaler.transform(test[features]).astype(float)
+    train.loc[:, features] = train[features].astype(float)
+    test.loc[:, features] = test[features].astype(float)
+    
+    train.loc[:, features] = scaler.fit_transform(train[features])
+    test.loc[:, features] = scaler.transform(test[features])
     
     return train, test
 
