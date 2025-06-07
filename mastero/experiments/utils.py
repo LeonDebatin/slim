@@ -13,6 +13,7 @@ import slim_gsgp.evaluators.fitness_functions
 from imblearn.over_sampling import SMOTENC, SMOTE, SMOTEN
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import warnings
 
 
 
@@ -42,34 +43,34 @@ def oversample(df, categoricals = []):
     
     return pd.concat([X,y], axis = 1)
 
-# def scale(train, test, categoricals):
-#     scaler = StandardScaler()
-#     features = list(set(train.columns) - set(categoricals) - {'target'})
-    
-#     train.loc[:, features] = train[features].astype(float)
-#     test.loc[:, features] = test[features].astype(float)
-    
-#     train.loc[:, features] = scaler.fit_transform(train[features])
-#     test.loc[:, features] = scaler.transform(test[features])
-    
-#     return train, test
-
-
 def scale(train, test, categoricals):
+    warnings.filterwarnings("ignore")
     scaler = StandardScaler()
-    
-    # Determine features (excluding categoricals and 'target')
     features = list(set(train.columns) - set(categoricals) - {'target'})
+    train.loc[:, features] = train[features].astype(float)
+    test.loc[:, features] = test[features].astype(float)
     
-    # Convert features in train and test to float64 to ensure compatibility
-    train[features] = train[features].apply(pd.to_numeric, errors='coerce')
-    test[features] = test[features].apply(pd.to_numeric, errors='coerce')
-    
-    # Apply StandardScaler
-    train[features] = scaler.fit_transform(train[features])
-    test[features] = scaler.transform(test[features])
+    train.loc[:, features] = scaler.fit_transform(train[features])
+    test.loc[:, features] = scaler.transform(test[features])
     
     return train, test
+
+
+# def scale(train, test, categoricals):
+#     scaler = StandardScaler()
+    
+#     # Determine features (excluding categoricals and 'target')
+#     features = list(set(train.columns) - set(categoricals) - {'target'})
+    
+#     # Convert features in train and test to float64 to ensure compatibility
+#     train[features] = train[features].apply(pd.to_numeric, errors='coerce')
+#     test[features] = test[features].apply(pd.to_numeric, errors='coerce')
+    
+#     # Apply StandardScaler
+#     train[features] = scaler.fit_transform(train[features])
+#     test[features] = scaler.transform(test[features])
+    
+#     return train, test
 
 
 
