@@ -91,9 +91,9 @@ def train_model(dataset_name, X_train, y_train, X_test, y_test, model, **model_c
                     y_test = y_test, 
                     **model_config
                     )
-    
+    #gsgp changed to slim because bug in tree node counter, therefore slim+sig2 is used
     if model == 'gsgp':
-        best_individual = gsgp(
+        best_individual = slim(
                     dataset_name=dataset_name, 
                     X_train=X_train, 
                     y_train = y_train, 

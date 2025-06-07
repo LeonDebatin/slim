@@ -98,7 +98,7 @@ class MonteCarlo():
                 elif model_config['name'] == 'gp':
                     node_count = best_individual.node_count
                 else:
-                    node_count = best_individual.nodes
+                    node_count = best_individual.nodes_count #'nodes' for gsgp
                 
                 if self.verbose:
                     print(

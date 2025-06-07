@@ -97,8 +97,14 @@ def get_all_results(experiment):
     # Concatenate all results at once (Faster than appending in a loop)
     results = pd.concat(results_list, ignore_index=True)
     
+    
     if 'config.slim_version' in results.columns:
-        results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
+        if 'config.slim_version' == 'SLIM+SIG2': #treated as gsgp
+            results.loc[results['config.slim_version'] == 'SLIM+SIG2', 'config.slim_version'] = np.nan
+            results.loc[results['config.slim_version'] == 'SLIM+SIG2', 'name'] = 'GSGP'
+        else:    
+            results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
+        
     results.rename(columns={'name': 'algorithm'}, inplace=True)
     results['algorithm'] = results['algorithm'].str.upper()
     results['dataset'] = results['dataset'].str.capitalize()
@@ -150,6 +156,8 @@ def get_log(experiment, dataset, config_id, add_columns = True):
     log['config_id'] = config_id
     if add_columns:
         log.columns = ['algorithm', 'id', 'dataset', 'seed', 'generation', 'elite_train_error', 'time', 'population_nodes', 'elite_test_error', 'elite_nodes', 'log_level', 'config_id']
+        log.loc[log['algorithm'] == 'SLIM+SIG2', 'algorithm'] = 'StandardGSGP'
+    
     return log
 
 
@@ -164,6 +172,7 @@ def get_logs(experiment, dataset, add_columns=True):
     if add_columns:
         logs.columns = ['algorithm', 'id', 'dataset', 'seed', 'generation', 'elite_train_error', 'time', 'population_nodes', 'elite_test_error', 'elite_nodes', 'log_level', 'config_id']
     logs['dataset'] = logs['dataset'].str.capitalize()
+    
     return logs
 
 def get_all_logs(experiment):
@@ -1058,8 +1067,8 @@ class InflationrateAnalysis(Analysis):
 class ComparisonAnalysis(Analysis):
     def __init__(self, experiment_name):
         super().__init__(experiment_name)
-        ana_fitness = FitnessAnalysis('fitness')
-        ana_inflate = InflationrateAnalysis('inflationrate')
+        ana_fitness = FitnessAnalysis('fitness_test')
+        ana_inflate = InflationrateAnalysis('inflationrate_test')
         self.results = pd.concat([self.results, ana_fitness.best_config_results[ana_fitness.best_config_results['config.fitness_function'] == 'sigmoid_rmse'], ana_inflate.best_config_results], axis=0).reset_index(drop=True)
         self.results_median = self.results.groupby(['dataset', 'config_id', 'algorithm'])[['test.rmse', 'nodes_count', 'test.accuracy', 'test.f1_score', 'test.roc_auc']].median().reset_index()
         
