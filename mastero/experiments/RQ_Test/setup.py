@@ -41,17 +41,6 @@ def main():
     with open("../RQ_Fitness/n_configs.txt", "r") as f:
         config_counter = int(f.read())
 
-    # exp1 = Experiment(
-    #     args.experiment_name,
-    #     "../../data/",
-    #     rq_configs,
-    #     n_runs=args.n_runs,
-    #     log=args.log,
-    #     verbose=args.verbose,
-    #     config_counter_start=config_counter
-    # )
-    # exp1.run()
-
     
     mc= MonteCarlo(
                     experiment_name=args.experiment_name,
@@ -68,29 +57,14 @@ def main():
 if __name__ == "__main__":
     main()
 
-# %%
-# from monte_carlo import MonteCarlo
-# MonteCarlo(
-#                 experiment_name="inflationrate",
-#                 dataset_name="wilt",
-#                 data_filepath="../../data/",
-#                 model_configs=rq_configs,
-#                 n_runs=30, 
-#                 log=True, 
-#                 verbose = True,
-#                 config_counter_start= config_counter
-#                 ).run()
 
-# %%
-# MonteCarlo(
-#                 experiment_name="inflationrate",
-#                 dataset_name="wisconsin",
-#                 data_filepath="../../data/",
-#                 model_configs=rq_configs,
-#                 n_runs=8, 
-#                 log=True, 
-#                 verbose = True,
-#                 config_counter_start= config_counter
-#                 ).run()
-
-
+    # exp1 = Experiment(
+    #     args.experiment_name,
+    #     "../../data/",
+    #     rq_configs,
+    #     n_runs=args.n_runs,
+    #     log=args.log,
+    #     verbose=args.verbose,
+    #     config_counter_start=config_counter
+    # )
+    # exp1.run()
