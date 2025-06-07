@@ -2,8 +2,8 @@ import numpy as np
 import copy
 
 basic_config_all = {
-    'pop_size': 100, #100
-    'n_iter': 1000,  #1000
+    'pop_size': 2, #100
+    'n_iter': 2,  #1000
     'elitism': True,
     'n_elites': 1,
     'init_depth': 6,
