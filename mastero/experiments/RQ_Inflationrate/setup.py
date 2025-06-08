@@ -58,3 +58,6 @@ def main():
                     config_counter_start= config_counter
                     )
     mc.run()
+
+if __name__ == "__main__":
+    main()
