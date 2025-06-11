@@ -99,11 +99,13 @@ def get_all_results(experiment):
     
     
     if 'config.slim_version' in results.columns:
-        if 'config.slim_version' == 'SLIM+SIG2': #treated as gsgp
-            results.loc[results['config.slim_version'] == 'SLIM+SIG2', 'config.slim_version'] = np.nan
-            results.loc[results['config.slim_version'] == 'SLIM+SIG2', 'name'] = 'GSGP'
-        else:    
-            results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
+        # Handle SLIM+SIG2 as GSGP
+        mask = results['config.slim_version'] == 'SLIM+SIG2'
+        results.loc[mask, 'config.slim_version'] = np.nan
+        results.loc[mask, 'name'] = 'GSGP'
+
+        # Rename any other slim_version entries to 'name'
+        results.loc[results['config.slim_version'].notna(), 'name'] = results['config.slim_version']
         
     results.rename(columns={'name': 'algorithm'}, inplace=True)
     results['algorithm'] = results['algorithm'].str.upper()
@@ -311,7 +313,7 @@ def get_min_euclidian_distance(results):
             scaler = MinMaxScaler()
             scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
             subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
-            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5
+            subset['euclidian_distance'] = (subset['test.rmse']**2 + subset['nodes_count']**2)**0.5# 2*
 
             subset = subset.sort_values('euclidian_distance')
             subset = subset.drop_duplicates(subset=['dataset', 'algorithm'], keep='first')
@@ -847,11 +849,16 @@ def get_wilcoxon_rank_pvalues(wtl_detailed, groupby):
             performances.append(wtl_detailed[(wtl_detailed[groupby] == group1) & (wtl_detailed['metric'] == metric)]['rank'].values)
             performances.append(wtl_detailed[(wtl_detailed[groupby] == group2) & (wtl_detailed['metric'] == metric)]['rank'].values)
 
-            p_value = stats.wilcoxon(*performances).pvalue
-            if p_value < 0.05:
-                sig = 'True'
-            else:
+            if np.array_equal(performances[0], performances[1]):
+                p_value = 1.0
                 sig = 'False'
+            
+            else:
+                p_value = stats.wilcoxon(*performances).pvalue
+                if p_value < 0.05:
+                    sig = 'True'
+                else:
+                    sig = 'False'
             
             p_values.append([metric, group1, group2, p_value, sig])
     
@@ -1067,8 +1074,8 @@ class InflationrateAnalysis(Analysis):
 class ComparisonAnalysis(Analysis):
     def __init__(self, experiment_name):
         super().__init__(experiment_name)
-        ana_fitness = FitnessAnalysis('fitness_test')
-        ana_inflate = InflationrateAnalysis('inflationrate_test')
+        ana_fitness = FitnessAnalysis('RQ_Fitness')
+        ana_inflate = InflationrateAnalysis('RQ_Inflationrate')
         self.results = pd.concat([self.results, ana_fitness.best_config_results[ana_fitness.best_config_results['config.fitness_function'] == 'sigmoid_rmse'], ana_inflate.best_config_results], axis=0).reset_index(drop=True)
         self.results_median = self.results.groupby(['dataset', 'config_id', 'algorithm'])[['test.rmse', 'nodes_count', 'test.accuracy', 'test.f1_score', 'test.roc_auc']].median().reset_index()
         

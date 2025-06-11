@@ -1,0 +1,22 @@
+
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Win Tie Loss}
+        \label{tab:RQ_Comparison_wtl}
+    \begin{tabular}{lccccc}
+\toprule
+Algorithm & Accuracy & F1-Score & RMSE & ROC-AUC & Tree Size \\
+\midrule
+GP vs GSGP & 1-6-3 & 1-4-5 & 1-4-5 & 0-5-5 & 10-0-0 \\
+GP vs SLIM*SIG1 & 9-0-1 & 9-0-1 & 7-2-1 & 4-3-3 & 5-2-3 \\
+GP vs SLIM+SIG1 & 2-3-5 & 1-4-5 & 2-2-6 & 0-6-4 & 3-5-2 \\
+GSGP vs SLIM*SIG1 & 9-1-0 & 9-0-1 & 9-0-1 & 6-2-2 & 0-0-10 \\
+GSGP vs SLIM+SIG1 & 1-8-1 & 2-7-1 & 4-4-2 & 4-5-1 & 0-0-10 \\
+SLIM*SIG1 vs SLIM+SIG1 & 0-1-9 & 0-1-9 & 0-1-9 & 1-4-5 & 4-2-4 \\
+\bottomrule
+\end{tabular}
+
+        
+    \end{table}
+    
