@@ -313,7 +313,7 @@ def get_min_euclidian_distance(results):
             scaler = MinMaxScaler()
             scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
             subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
-            subset['euclidian_distance'] = (subset['test.rmse']**2 + subset['nodes_count']**2)**0.5# 2*
+            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5# 2*
 
             subset = subset.sort_values('euclidian_distance')
             subset = subset.drop_duplicates(subset=['dataset', 'algorithm'], keep='first')
@@ -468,7 +468,7 @@ def plot_tree_size_evolution(logs):
 
 def plot_performance_evolution_by_fitness_function(logs):
     unique_datasets = logs['dataset'].unique()
-    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 10 * int(len(unique_datasets)/2)), squeeze=False)
+    fig, ax = plt.subplots(len(unique_datasets), 2, figsize=(8, 2.5 * int(len(unique_datasets)/2)), squeeze=False)
 
     for i, dataset in enumerate(unique_datasets):
         subset = logs[logs['dataset'] == dataset]
@@ -557,8 +557,8 @@ def plot_tree_size_evolution_by_fitness_function(logs):
         ax[i,j].set_title(dataset)
         ax[i,j].set_xlabel("Generation")
         ax[i,j].set_ylabel("Tree Size")
-        ax[i,j].set_yticks(np.arange(0, 6000, 1000))
-        ax[i,j].set_ylim(0, 5000)
+        ax[i,j].set_yticks(np.arange(0, 11000, 2000))
+        ax[i,j].set_ylim(0, 10000)
         ax[i,j].legend_.remove()
         ax[i, j].spines['right'].set_visible(False)
         ax[i, j].spines['top'].set_visible(False)
@@ -994,6 +994,7 @@ class FitnessAnalysis(Analysis):
         plot_to_latex(self.ranks_plot[0], experiment_name, 'ranks', 'Ranks by Fitness Function') #figure, experiment, name, caption
         plot_to_latex(self.performance_plot[0], experiment_name, 'performance', 'Performance by Fitness Function') #figure, experiment, name, caption
         plot_to_latex(self.tree_size_evolution_plot[0], experiment_name, 'tree_size_evolution', 'Tree Size Evolution by Fitness Function') #figure, experiment, name, caption
+        plot_to_latex(self.performance_evolution_plot[0], experiment_name, 'performance_evolution', 'Performance Evolution by Fitness Function') #figure, experiment, name, caption
         
         
 class InflationrateAnalysis(Analysis):
