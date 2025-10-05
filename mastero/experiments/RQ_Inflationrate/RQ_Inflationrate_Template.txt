@@ -1,0 +1,33 @@
+# System setup
+sudo dnf update -y
+sudo dnf install -y python3.11 python3.11-pip git tmux
+sudo alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+
+# Clone repo (fix this URL if needed)
+git clone ...
+
+# Create a run script
+cat << 'EOF' > ~/run_fitness.sh
+#!/bin/bash
+set -e
+
+python3.11 -m venv ~/myenv
+source ~/myenv/bin/activate
+pip install -r slim/requirements.txt
+
+cd slim/mastero/experiments/RQ_Inflationrate
+python setup.py --experiment_name RQ_Inflationrate --dataset_name df_name
+
+cd ~/slim
+git pull
+git add .
+git commit -m "RQ_Inflationrate : df_name"
+git push
+
+sudo shutdown -h +1
+EOF
+
+chmod +x ~/run_fitness.sh
+
+# Start tmux and run the script inside it
+tmux new -s mysession '~/run_fitness.sh'

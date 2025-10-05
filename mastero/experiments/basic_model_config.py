@@ -55,8 +55,8 @@ basic_model_config_gsgp = {
 
 basic_config_slim= {
     'slim_version': None,
-    'ms_lower': 100,
-    'ms_upper': 100,
+    'ms_lower': 0,
+    'ms_upper': None,
     'p_inflate': None,
     'reconstruct': True,
     'copy_parent': True,
