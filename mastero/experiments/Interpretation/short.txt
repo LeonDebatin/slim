@@ -1,1 +1,1 @@
-('add', ('subtract', 'constant__0.8', 'constant_2.2'), 'HALSTEAD_CONTENT') + f(('subtract', 'LOC_CODE_AND_COMMENT', 'CYCLOMATIC_COMPLEXITY')) + f(('subtract', 'LOC_EXECUTABLE', 'NUMBER_OF_LINES')) + f(('multiply', 'CYCLOMATIC_DENSITY', 'HALSTEAD_LENGTH')) + f(('divide', 'HALSTEAD_CONTENT', 'constant__6.4')) + f(('subtract', 'MULTIPLE_CONDITION_COUNT', 'CYCLOMATIC_DENSITY')) + f(('divide', 'HALSTEAD_LEVEL', 'HALSTEAD_ERROR_EST'))
+('add', ('subtract', 'constant__0.8', 'constant_2.2'), 'HALSTEAD_CONTENT') + f(('divide', 'HALSTEAD_EFFORT', 'constant_8.3'))
