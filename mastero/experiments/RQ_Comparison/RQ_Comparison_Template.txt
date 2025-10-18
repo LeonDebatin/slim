@@ -16,6 +16,7 @@ source ~/myenv/bin/activate
 pip install -r slim/requirements.txt
 
 cd slim/mastero/experiments/RQ_Comparison
+#Fix df_name
 python setup.py --experiment_name RQ_Comparison --dataset_name df_name
 
 cd ~/slim

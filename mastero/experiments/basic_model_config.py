@@ -35,7 +35,7 @@ basic_model_config_gp = {
                          'config': {**basic_config_all, **basic_config_gp}
                         }
 
-#gsgp changed to slim because bug in tree node counter, therefore slim+sig2 is used
+#gsgp changed to slim because bug in tree node counter, therefore slim+sig2 is used with inflationrate of 1.0
 basic_config_gsgp = {
     'slim_version': 'SLIM+SIG2',
     'ms_lower': 0,

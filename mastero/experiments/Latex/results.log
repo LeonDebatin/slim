@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  10 MAY 2025 12:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  18 OCT 2025 22:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -296,21 +296,54 @@ File: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 326.30875pt.
 ) (Chapters/Tables/Results/comparison_friedman.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 6.
 
-Chapters/Tables/Results/comparison_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+Chapters/Tables/Results/comparison_friedman.tex:20: Too many }'s.
+\@endfloatbox ...pagefalse \outer@nobreak \egroup 
+                                                  \color@endbox 
+l.20     \end{table}
+                    
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Chapters/Tables/Results/comparison_friedman.tex:20: Extra \endgroup.
+\color@endgroup ->\endgraf \endgroup 
+                                     
+l.20     \end{table}
+                    
+Things are pretty mixed up, but I think the worst is over.
+
+Chapters/Tables/Results/comparison_friedman.tex:20: Too many }'s.
+\color@endbox ->\color@endgroup \egroup 
+                                        
+l.20     \end{table}
+                    
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Chapters/Tables/Results/comparison_friedman.tex:20: LaTeX Error: \begin{document} ended by \end{table}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.2     \begin{table}[H]
-                        
-Option `H' ignored and `p' used.
+l.20     \end{table}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 5.
+Chapters/Tables/Results/comparison_friedman.tex:20: Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.20     \end{table}
+                    
+Things are pretty mixed up, but I think the worst is over.
+
 ) (Chapters/Tables/Results/comparison_wtl.tex
 
 Chapters/Tables/Results/comparison_wtl.tex:2: LaTeX Error: Unknown float option `H'.
@@ -324,7 +357,7 @@ l.2     \begin{table}[H]
 Option `H' ignored and `p' used.
 
 
-Overfull \hbox (43.66727pt too wide) in paragraph at lines 5--17
+Overfull \hbox (43.66727pt too wide) in paragraph at lines 7--19
  [][] 
  []
 
@@ -352,7 +385,9 @@ l.2     \begin{table}[H]
                         
 Option `H' ignored and `p' used.
 
-) [1{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../Latex/Chapters/Figures/Results/comparison_performance.png>] [2 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [3 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [4 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [5 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [6 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [7 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [8 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [9 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
+) [1
+
+{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2 <../Latex/Chapters/Figures/Results/comparison_performance.png>] [3 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [4 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [5 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [6 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [7 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [8 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [9 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [12 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -365,15 +400,15 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Here is how much of TeX's memory you used:
  1530 strings out of 474486
  34782 string characters out of 5755011
- 1937542 words of memory out of 5000000
+ 1935542 words of memory out of 5000000
  23809 multiletter control sequences out of 15000+600000
  558069 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,8n,65p,420b,230s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/leond/LATEX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on results.pdf (11 pages, 6169409 bytes).
+Output written on results.pdf (12 pages, 6169818 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
+ 69 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
