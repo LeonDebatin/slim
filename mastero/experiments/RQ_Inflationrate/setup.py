@@ -50,7 +50,7 @@ def main():
     mc= MonteCarlo(
                     experiment_name=args.experiment_name,
                     dataset_name=args.dataset_name,
-                    data_filepath="../../data/",
+                    data_filepath="../../data2/",
                     model_configs=rq_configs,
                     n_runs=30, 
                     log=True, 
