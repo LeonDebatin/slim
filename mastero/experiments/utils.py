@@ -24,6 +24,14 @@ def load_and_adapt_data_info(filepath):
     data_info['test_indices'] = data_info['test_indices'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     data_info['train_indices'] = data_info['train_indices'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     data_info['categoricals'] = data_info['categoricals'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    
+    # Handle binaries column if it exists (for data2 compatibility)
+    if 'binaries' in data_info.columns:
+        data_info['binaries'] = data_info['binaries'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    else:
+        # For backward compatibility with original data, set empty binaries
+        data_info['binaries'] = [[] for _ in range(len(data_info))]
+    
     return data_info
 
 
@@ -43,6 +51,49 @@ def oversample(df, categoricals = []):
     
     return pd.concat([X,y], axis = 1)
 
+def encode_categoricals(train, test, categoricals):
+    """
+    Apply one-hot encoding to categorical columns based ONLY on training data.
+    This prevents data leakage by not using test set categories during encoding.
+    Maintains the exact same column order as the original notebook preprocessing.
+    """
+    import pandas as pd
+    
+    if not categoricals:
+        return train, test
+    
+    # Process all categoricals at once like the original notebook
+    # Use get_dummies on training data to establish the structure
+    train_encoded = pd.get_dummies(train, columns=categoricals, dtype=int)
+    
+    # For test data, we need to ensure it has the same dummy columns as train
+    test_encoded = pd.get_dummies(test, columns=categoricals, dtype=int)
+    
+    # Get all dummy column names from training data
+    non_categorical_cols = [col for col in train.columns if col not in categoricals]
+    train_dummy_cols = [col for col in train_encoded.columns if col not in non_categorical_cols]
+    
+    # Ensure test set has same dummy columns as train set
+    for dummy_col in train_dummy_cols:
+        if dummy_col not in test_encoded.columns:
+            test_encoded[dummy_col] = 0
+    
+    # Remove any dummy columns from test that don't exist in train (categories not seen in training)
+    test_dummy_cols = [col for col in test_encoded.columns if col not in non_categorical_cols]
+    extra_test_cols = [col for col in test_dummy_cols if col not in train_dummy_cols]
+    if extra_test_cols:
+        test_encoded = test_encoded.drop(columns=extra_test_cols)
+    
+    # Reorder columns to match original preprocessing: non-categoricals (except target), then dummies, then target
+    other_cols = [col for col in non_categorical_cols if col != 'target']
+    final_order = other_cols + train_dummy_cols + ['target']
+    
+    train_encoded = train_encoded[final_order]
+    test_encoded = test_encoded[final_order]
+    
+    return train_encoded, test_encoded
+
+
 def scale(train, test, categoricals):
     warnings.filterwarnings("ignore")
     scaler = StandardScaler()
@@ -58,16 +109,34 @@ def scale(train, test, categoricals):
 
 
 
-def return_train_test(df, train_indices, test_indices, scaling, oversampling = False, categoricals = []):
+def return_train_test(df, train_indices, test_indices, scaling, oversampling = False, categoricals = [], binaries = []):
     
     train = df.iloc[train_indices]
     test = df.iloc[test_indices]
     
+    # Apply one-hot encoding to categoricals based ONLY on training data
+    if categoricals:
+        train, test = encode_categoricals(train, test, categoricals)
+    
+    # Get all encoded categorical columns for scaling exclusion
+    all_categorical_cols = []
+    if categoricals:
+        # After encoding, we need to identify the new dummy columns
+        for col in categoricals:
+            if col in train.columns:
+                # Find all dummy columns created from this categorical
+                dummy_cols = [c for c in train.columns if c.startswith(f"{col}_")]
+                all_categorical_cols.extend(dummy_cols)
+        # Add binary columns to exclusion list (they don't need scaling)
+        all_categorical_cols.extend(binaries)
+    else:
+        all_categorical_cols = binaries
+    
     if scaling:
-        train, test = scale(train, test, categoricals)
+        train, test = scale(train, test, all_categorical_cols)
     
     if oversampling:
-        train = oversample(train, categoricals)
+        train = oversample(train, all_categorical_cols)
     
     X_train, y_train = load_pandas_df(train, X_y=True)
     X_test, y_test = load_pandas_df(test, X_y=True)
@@ -123,10 +192,33 @@ def compute_class_weights(y):
     return weights
 
 def update_sample_weights(y_train, y_test):
-    class_weights = compute_class_weights(y_train)
-    # class_weight_dict = {int(label): weight for label, weight in zip(np.unique(y_train), class_weights)}
-    train_sample_weights = torch.tensor([class_weights[int(label)] for label in y_train], dtype=torch.float32)
-    test_sample_weights = torch.tensor([class_weights[int(label)] for label in y_test], dtype=torch.float32)
+    # Convert tensors to numpy for class weight computation if needed
+    if torch.is_tensor(y_train):
+        y_train_np = y_train.numpy()
+    else:
+        y_train_np = y_train
+    
+    if torch.is_tensor(y_test):
+        y_test_np = y_test.numpy()  
+    else:
+        y_test_np = y_test
+        
+    class_weights = compute_class_weights(y_train_np)
+    
+    # Ensure we have the right number of class weights for indexing
+    unique_labels = np.unique(np.concatenate([y_train_np, y_test_np]))
+    
+    # Create a mapping for safe indexing
+    label_to_weight = {}
+    for i, label in enumerate(sorted(unique_labels)):
+        if i < len(class_weights):
+            label_to_weight[int(label)] = class_weights[i]
+        else:
+            label_to_weight[int(label)] = 1.0  # Default weight
+    
+    train_sample_weights = torch.tensor([label_to_weight[int(label)] for label in y_train_np], dtype=torch.float32)
+    test_sample_weights = torch.tensor([label_to_weight[int(label)] for label in y_test_np], dtype=torch.float32)
+    
     slim_gsgp.evaluators.fitness_functions.train_sample_weights = train_sample_weights
     slim_gsgp.evaluators.fitness_functions.test_sample_weights = test_sample_weights
     return

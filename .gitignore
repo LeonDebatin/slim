@@ -9,3 +9,4 @@ slim_gsgp/log/slim_postgrid_resid_build_sale_price-size.csv_test_ignore
 *.pyc
 /log
 mastero/experiments/cloud_setup
+mastero/data2/

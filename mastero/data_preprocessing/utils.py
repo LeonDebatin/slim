@@ -19,7 +19,7 @@ def get_train_test_indices(df):
     return train_indices, test_indices
 
 
-def info_dict(name, df, categoricals):
+def info_dict(name, df, categoricals=[], binaries=[]):
     info = {}
     info['name'] = name
     info['n_samples'] = df.shape[0]
@@ -30,8 +30,10 @@ def info_dict(name, df, categoricals):
         imbalance = 1 - imbalance
         
     info['imbalance'] = imbalance
-    info['categoricals'] = categoricals
+    info['categoricals'] = categoricals  # True categoricals (>2 values, need one-hot)
+    info['binaries'] = binaries  # Binary columns (2 values, 0/1 encoding)
     info['n_categoricals'] = len(categoricals)
+    info['n_binaries'] = len(binaries)
     info['train_indices'], info['test_indices'] = get_train_test_indices(df)
     
     return info

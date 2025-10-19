@@ -74,7 +74,8 @@ class MonteCarlo():
                                                                         test_indices = test_indices,
                                                                         scaling = model_config['scaling'],
                                                                         oversampling = model_config['oversampling'], 
-                                                                        categoricals = self.data_info.loc[self.data_info['name']== self.dataset_name, 'categoricals'].values[0]
+                                                                        categoricals = self.data_info.loc[self.data_info['name']== self.dataset_name, 'categoricals'].values[0],
+                                                                        binaries = self.data_info.loc[self.data_info['name']== self.dataset_name, 'binaries'].values[0]
                                                                     )
 
                 update_sample_weights(y_train, y_test)
