@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  18 OCT 2025 22:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.10)  21 OCT 2025 23:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -64,7 +64,8 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count199
 \l__pdf_internal_box=\box51
-) (results.aux)
+)
+No file results.aux.
 \openout1 = `results.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -81,7 +82,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
- (C:\Users\leond\LATEX\tex/context/base/mkii\supp-pdf.mkii
+(C:\Users\leond\LATEX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count266
 \scratchdimen=\dimen156
@@ -153,6 +154,77 @@ File: ../Latex/Chapters/Figures/Results/comparison_ranks.png Graphic file (type 
 <use ../Latex/Chapters/Figures/Results/comparison_ranks.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_ranks.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+) (Chapters/Figures/Results/comparison_test_performance.tex
+
+Chapters/Figures/Results/comparison_test_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/comparison_test_performance.png, id=5, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/comparison_test_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_test_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_test_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+) (Chapters/Figures/Results/comparison_test_performance_evolution.tex
+
+Chapters/Figures/Results/comparison_test_performance_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/comparison_test_performance_evolution.png, id=6, 570.49937pt x 882.99486pt>
+File: ../Latex/Chapters/Figures/Results/comparison_test_performance_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_test_performance_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_test_performance_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 533.99123pt.
+
+LaTeX Warning: Float too large for page by 7.93567pt on input line 7.
+
+) (Chapters/Figures/Results/comparison_test_ranks.tex
+
+Chapters/Figures/Results/comparison_test_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/comparison_test_ranks.png, id=7, 394.30511pt x 232.7094pt>
+File: ../Latex/Chapters/Figures/Results/comparison_test_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_test_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_test_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+) (Chapters/Figures/Results/comparison_test_tree_size_evolution.tex
+
+Chapters/Figures/Results/comparison_test_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/comparison_test_tree_size_evolution.png, id=8, 570.64392pt x 528.87186pt>
+File: ../Latex/Chapters/Figures/Results/comparison_test_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/comparison_test_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_test_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 319.75461pt.
 ) (Chapters/Figures/Results/comparison_tree_size_evolution.tex
 
 Chapters/Figures/Results/comparison_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
@@ -165,10 +237,81 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png, id=5, 569.77669pt x 528.87186pt>
+<../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png, id=9, 569.77669pt x 528.87186pt>
 File: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 320.2388pt.
+) (Chapters/Figures/Results/final_comparison_performance.tex
+
+Chapters/Figures/Results/final_comparison_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/final_comparison_performance.png, id=10, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/final_comparison_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/final_comparison_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/final_comparison_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+) (Chapters/Figures/Results/final_comparison_performance_evolution.tex
+
+Chapters/Figures/Results/final_comparison_performance_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/final_comparison_performance_evolution.png, id=11, 569.63214pt x 882.99486pt>
+File: ../Latex/Chapters/Figures/Results/final_comparison_performance_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/final_comparison_performance_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/final_comparison_performance_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 534.78616pt.
+
+LaTeX Warning: Float too large for page by 8.7306pt on input line 7.
+
+) (Chapters/Figures/Results/final_comparison_ranks.tex
+
+Chapters/Figures/Results/final_comparison_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/final_comparison_ranks.png, id=12, 394.30511pt x 234.1548pt>
+File: ../Latex/Chapters/Figures/Results/final_comparison_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/final_comparison_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/final_comparison_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 204.88493pt.
+) (Chapters/Figures/Results/final_comparison_tree_size_evolution.tex
+
+Chapters/Figures/Results/final_comparison_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/final_comparison_tree_size_evolution.png, id=13, 569.77669pt x 528.87186pt>
+File: ../Latex/Chapters/Figures/Results/final_comparison_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/final_comparison_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/final_comparison_tree_size_evolution.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 320.2388pt.
 ) (Chapters/Figures/Results/fitness_performance.tex
 
@@ -182,7 +325,7 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/fitness_performance.png, id=6, 570.49937pt x 705.93336pt>
+<../Latex/Chapters/Figures/Results/fitness_performance.png, id=14, 570.49937pt x 705.93336pt>
 File: ../Latex/Chapters/Figures/Results/fitness_performance.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_performance.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_performance.png  used on input line 4.
@@ -199,11 +342,62 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/fitness_ranks.png, id=7, 394.30511pt x 232.85394pt>
+<../Latex/Chapters/Figures/Results/fitness_ranks.png, id=15, 394.30511pt x 232.85394pt>
 File: ../Latex/Chapters/Figures/Results/fitness_ranks.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_ranks.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_ranks.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 203.74669pt.
+) (Chapters/Figures/Results/fitness_test_performance.tex
+
+Chapters/Figures/Results/fitness_test_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/fitness_test_performance.png, id=16, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/fitness_test_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_test_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_test_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+) (Chapters/Figures/Results/fitness_test_ranks.tex
+
+Chapters/Figures/Results/fitness_test_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/fitness_test_ranks.png, id=17, 394.30511pt x 232.7094pt>
+File: ../Latex/Chapters/Figures/Results/fitness_test_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_test_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_test_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+) (Chapters/Figures/Results/fitness_test_tree_size_evolution.tex
+
+Chapters/Figures/Results/fitness_test_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/fitness_test_tree_size_evolution.png, id=18, 570.64392pt x 635.10876pt>
+File: ../Latex/Chapters/Figures/Results/fitness_test_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/fitness_test_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_test_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 383.98517pt.
 ) (Chapters/Figures/Results/fitness_tree_size_evolution.tex
 
 Chapters/Figures/Results/fitness_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
@@ -216,7 +410,7 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png, id=8, 569.77669pt x 635.10876pt>
+<../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png, id=19, 569.77669pt x 635.10876pt>
 File: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png  used on input line 4.
@@ -233,7 +427,7 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png, id=9, 570.49937pt x 820.40904pt>
+<../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png, id=20, 570.49937pt x 820.40904pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png  used on input line 4.
@@ -250,7 +444,7 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png, id=10, 570.64392pt x 891.95634pt>
+<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png, id=21, 570.64392pt x 891.95634pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png  used on input line 4.
@@ -270,7 +464,7 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png, id=11, 570.49937pt x 891.95634pt>
+<../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png, id=22, 570.49937pt x 891.95634pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png  used on input line 4.
@@ -278,6 +472,80 @@ Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_perform
 
 LaTeX Warning: Float too large for page by 13.35513pt on input line 7.
 
+) (Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.tex
+
+Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.png, id=23, 570.64392pt x 820.40904pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 496.01726pt.
+) (Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.tex
+
+Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.png, id=24, 570.64392pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_mulsig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.27458pt.
+
+LaTeX Warning: Float too large for page by 13.21902pt on input line 7.
+
+) (Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.tex
+
+Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.png, id=25, 570.64392pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_test_performance_complexity_tradeoff_plussig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.27458pt.
+
+LaTeX Warning: Float too large for page by 13.21902pt on input line 7.
+
+) (Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.tex
+
+Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.png, id=26, 570.49937pt x 539.71236pt>
+File: ../Latex/Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_test_tree_size_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 326.3911pt.
 ) (Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.tex
 
 Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
@@ -290,10 +558,226 @@ l.2     \begin{figure}[H]
                          
 Option `H' ignored and `p' used.
 
-<../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png, id=12, 570.64392pt x 539.71236pt>
+<../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png, id=27, 570.64392pt x 539.71236pt>
 File: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png Graphic file (type png)
 <use ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>
 Package pdftex.def Info: ../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 326.30875pt.
+) (Chapters/Figures/Results/RQ_Comparison_performance.tex
+
+Chapters/Figures/Results/RQ_Comparison_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Comparison_performance.png, id=28, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Comparison_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Comparison_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Comparison_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+) (Chapters/Figures/Results/RQ_Comparison_performance_evolution.tex
+
+Chapters/Figures/Results/RQ_Comparison_performance_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Comparison_performance_evolution.png, id=29, 569.63214pt x 882.99486pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Comparison_performance_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Comparison_performance_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Comparison_performance_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 534.78616pt.
+
+LaTeX Warning: Float too large for page by 8.7306pt on input line 7.
+
+) (Chapters/Figures/Results/RQ_Comparison_ranks.tex
+
+Chapters/Figures/Results/RQ_Comparison_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Comparison_ranks.png, id=30, 394.30511pt x 232.7094pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Comparison_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Comparison_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Comparison_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+) (Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.tex
+
+Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.png, id=31, 569.77669pt x 528.87186pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Comparison_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 320.2388pt.
+) (Chapters/Figures/Results/RQ_Fitness_performance.tex
+
+Chapters/Figures/Results/RQ_Fitness_performance.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Fitness_performance.png, id=32, 570.49937pt x 705.93336pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Fitness_performance.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Fitness_performance.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Fitness_performance.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 426.91327pt.
+) (Chapters/Figures/Results/RQ_Fitness_performance_evolution.tex
+
+Chapters/Figures/Results/RQ_Fitness_performance_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Fitness_performance_evolution.png, id=33, 569.63214pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Fitness_performance_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Fitness_performance_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Fitness_performance_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 540.21368pt.
+
+LaTeX Warning: Float too large for page by 14.15813pt on input line 7.
+
+) (Chapters/Figures/Results/RQ_Fitness_ranks.tex
+
+Chapters/Figures/Results/RQ_Fitness_ranks.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Fitness_ranks.png, id=34, 394.30511pt x 232.7094pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Fitness_ranks.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Fitness_ranks.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Fitness_ranks.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 203.62021pt.
+) (Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.tex
+
+Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.png, id=35, 570.2103pt x 635.10876pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Fitness_tree_size_evolution.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 384.27591pt.
+) (Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.tex
+
+Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.png, id=36, 570.64392pt x 820.40904pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_by_p_inflate.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 496.01726pt.
+) (Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.tex
+
+Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.png, id=37, 570.64392pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_mulsig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.27458pt.
+
+LaTeX Warning: Float too large for page by 13.21902pt on input line 7.
+
+) (Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.tex
+
+Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.png, id=38, 570.49937pt x 891.95634pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_performance_complexity_tradeoff_plussig1.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 539.41069pt.
+
+LaTeX Warning: Float too large for page by 13.35513pt on input line 7.
+
+) (Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.tex
+
+Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{figure}[H]
+                         
+Option `H' ignored and `p' used.
+
+<../Latex/Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.png, id=39, 570.64392pt x 539.71236pt>
+File: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.png Graphic file (type png)
+<use ../Latex/Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.png>
+Package pdftex.def Info: ../Latex/Chapters/Figures/Results/RQ_Inflationrate_tree_size_by_p_inflate.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 326.30875pt.
 ) (Chapters/Tables/Results/comparison_friedman.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -344,6 +828,35 @@ l.20     \end{table}
                     
 Things are pretty mixed up, but I think the worst is over.
 
+) (Chapters/Tables/Results/comparison_test_friedman.tex
+
+Chapters/Tables/Results/comparison_test_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) (Chapters/Tables/Results/comparison_test_wtl.tex
+
+Chapters/Tables/Results/comparison_test_wtl.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+
+Overfull \hbox (46.44505pt too wide) in paragraph at lines 7--19
+ [][] 
+ []
+
 ) (Chapters/Tables/Results/comparison_wtl.tex
 
 Chapters/Tables/Results/comparison_wtl.tex:2: LaTeX Error: Unknown float option `H'.
@@ -361,9 +874,62 @@ Overfull \hbox (43.66727pt too wide) in paragraph at lines 7--19
  [][] 
  []
 
+) (Chapters/Tables/Results/final_comparison_friedman.tex
+
+Chapters/Tables/Results/final_comparison_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) (Chapters/Tables/Results/final_comparison_wtl.tex
+
+Chapters/Tables/Results/final_comparison_wtl.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+
+Overfull \hbox (46.44505pt too wide) in paragraph at lines 7--19
+ [][] 
+ []
+
 ) (Chapters/Tables/Results/fitness_friedman.tex
 
 Chapters/Tables/Results/fitness_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) (Chapters/Tables/Results/fitness_test_friedman.tex
+
+Chapters/Tables/Results/fitness_test_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) (Chapters/Tables/Results/fitness_test_wtl.tex
+
+Chapters/Tables/Results/fitness_test_wtl.tex:2: LaTeX Error: Unknown float option `H'.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -385,30 +951,1294 @@ l.2     \begin{table}[H]
                         
 Option `H' ignored and `p' used.
 
-) [1
+) (Chapters/Tables/Results/inflationrate_test_tradeoff.tex
 
-{C:/Users/leond/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2 <../Latex/Chapters/Figures/Results/comparison_performance.png>] [3 <../Latex/Chapters/Figures/Results/comparison_performance_evolution.png>] [4 <../Latex/Chapters/Figures/Results/comparison_ranks.png>] [5 <../Latex/Chapters/Figures/Results/comparison_tree_size_evolution.png>] [6 <../Latex/Chapters/Figures/Results/fitness_performance.png>] [7 <../Latex/Chapters/Figures/Results/fitness_ranks.png>] [8 <../Latex/Chapters/Figures/Results/fitness_tree_size_evolution.png>] [9 <../Latex/Chapters/Figures/Results/inflationrate_performance_by_p_inflate.png>] [10 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_mulsig1.png>] [11 <../Latex/Chapters/Figures/Results/inflationrate_performance_complexity_tradeoff_plussig1.png>] [12 <../Latex/Chapters/Figures/Results/inflationrate_tree_size_by_p_inflate.png>] (results.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-04>
- ***********
+Chapters/Tables/Results/inflationrate_test_tradeoff.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+Overfull \hbox (301.84868pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
 
- ) 
-Here is how much of TeX's memory you used:
- 1530 strings out of 474486
- 34782 string characters out of 5755011
- 1935542 words of memory out of 5000000
- 23809 multiletter control sequences out of 15000+600000
- 558069 words of font info for 36 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 57i,8n,65p,420b,230s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/leond/LATEX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on results.pdf (12 pages, 6169818 bytes).
-PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+) (Chapters/Tables/Results/inflationrate_tradeoff.tex
 
+Chapters/Tables/Results/inflationrate_tradeoff.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+
+Overfull \hbox (321.84874pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
+
+) (Chapters/Tables/Results/RQ_Comparison_friedman.tex
+
+Chapters/Tables/Results/RQ_Comparison_friedman.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+) (Chapters/Tables/Results/RQ_Comparison_wtl.tex
+
+Chapters/Tables/Results/RQ_Comparison_wtl.tex:2: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+Option `H' ignored and `p' used.
+
+
+Overfull \hbox (43.66727pt too wide) in paragraph at lines 7--19
+ [][] 
+ []
+
+) (Chapters/Tables/Results/RQ_Fitness_friedman.tex
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.19     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.19     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.19     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.19     \end{table}
+                    
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.19     \end{table}
+                    
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Extra \else.
+\end@float ...pdima \penalty \@floatpenalty \else 
+                                                  \vadjust {\penalty -\@Miv ...
+l.19     \end{table}
+                    
+I'm ignoring this; it doesn't match any \if.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: You can't use `\vadjust' in vertical mode.
+\end@float ...nalty \@floatpenalty \else \vadjust 
+                                                  {\penalty -\@Miv \vbox {}\...
+l.19     \end{table}
+                    
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.19     \end{table}
+                    
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Fitness_friedman.tex:19: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.19     \end{table}
+                    
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+) (Chapters/Tables/Results/RQ_Fitness_wtl.tex
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing = inserted for \ifnum.
+<to be read again> 
+                   \@elt 
+l.21     \end{table}
+                    
+I was expecting to see `<', `=', or `>'. Didn't.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: LaTeX Error: This may be a LaTeX bug.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21     \end{table}
+                    
+Call for help
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...advance \@tempdima \ht \@marbox 
+                                                  \ifdim \@tempdima >\z@ \@l...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Bad register code (-8482334).
+\@addmarginpar ...e \space moved}\else \@tempdima 
+                                                  \z@ \fi \global \@mparbott...
+l.21     \end{table}
+                    
+A register number must be between 0 and 32767.
+I changed this one to zero.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...vance \@mparbottom \dp \@marbox 
+                                                  \global \advance \@mparbot...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...dvance \@tempdima -\ht \@marbox 
+                                                  \global \setbox \@marbox \...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...marbox \global \setbox \@marbox 
+                                                  \vbox {\vskip \@tempdima \...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...\vskip \@tempdima \box \@marbox 
+                                                  }\global \ht \@marbox \z@ ...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ... \@marbox }\global \ht \@marbox 
+                                                  \z@ \global \dp \@marbox \...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.21     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...marbox \z@ \global \dp \@marbox 
+                                                  \z@ \kern -\@pagedp \noint...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.21     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Undefined control sequence.
+\@addmarginpar ...arginparwidth \fi \box \@marbox 
+                                                  \hss }\nointerlineskip \hb...
+l.21     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Fitness_wtl.tex:21: Missing number, treated as zero.
+<to be read again> 
+                   \hss 
+l.21     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+) (Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Overfull \hbox (321.84874pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.36     \end{table}
+                    
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.36     \end{table}
+                    
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Extra \else.
+\end@float ...pdima \penalty \@floatpenalty \else 
+                                                  \vadjust {\penalty -\@Miv ...
+l.36     \end{table}
+                    
+I'm ignoring this; it doesn't match any \if.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: You can't use `\vadjust' in vertical mode.
+\end@float ...nalty \@floatpenalty \else \vadjust 
+                                                  {\penalty -\@Miv \vbox {}\...
+l.36     \end{table}
+                    
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.36     \end{table}
+                    
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff.tex:36: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.36     \end{table}
+                    
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+) (Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Overfull \hbox (321.84874pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing = inserted for \ifnum.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+I was expecting to see `<', `=', or `>'. Didn't.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: LaTeX Error: This may be a LaTeX bug.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36     \end{table}
+                    
+Call for help
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...advance \@tempdima \ht \@marbox 
+                                                  \ifdim \@tempdima >\z@ \@l...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \protect 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...vance \@mparbottom \dp \@marbox 
+                                                  \global \advance \@mparbot...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...dvance \@tempdima -\ht \@marbox 
+                                                  \global \setbox \@marbox \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...marbox \global \setbox \@marbox 
+                                                  \vbox {\vskip \@tempdima \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...\vskip \@tempdima \box \@marbox 
+                                                  }\global \ht \@marbox \z@ ...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ... \@marbox }\global \ht \@marbox 
+                                                  \z@ \global \dp \@marbox \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...marbox \z@ \global \dp \@marbox 
+                                                  \z@ \kern -\@pagedp \noint...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.36     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...arginparwidth \fi \box \@marbox 
+                                                  \hss }\nointerlineskip \hb...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \hss 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+) (Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Overfull \hbox (321.84874pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.34 \end{table}
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.34 \end{table}
+                
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.34 \end{table}
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.34 \end{table}
+                
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.34 \end{table}
+                
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Extra \else.
+\end@float ...pdima \penalty \@floatpenalty \else 
+                                                  \vadjust {\penalty -\@Miv ...
+l.34 \end{table}
+                
+I'm ignoring this; it doesn't match any \if.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: You can't use `\vadjust' in vertical mode.
+\end@float ...nalty \@floatpenalty \else \vadjust 
+                                                  {\penalty -\@Miv \vbox {}\...
+l.34 \end{table}
+                
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.34 \end{table}
+                
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \ETC.
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r1_t2.tex:34: Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.34 \end{table}
+                
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+) (Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:2: LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2     \begin{table}[H]
+                        
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:2: Undefined control sequence.
+\@xfloat ...@fltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.2     \begin{table}[H]
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:2: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.2     \begin{table}[H]
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Overfull \hbox (321.84874pt too wide) in paragraph at lines 7--34
+ [][] 
+ []
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   >
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+<argument> \@currbox 
+                     
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing = inserted for \ifnum.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+I was expecting to see `<', `=', or `>'. Didn't.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: LaTeX Error: This may be a LaTeX bug.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36     \end{table}
+                    
+Call for help
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...advance \@tempdima \ht \@marbox 
+                                                  \ifdim \@tempdima >\z@ \@l...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \protect 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...vance \@mparbottom \dp \@marbox 
+                                                  \global \advance \@mparbot...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...dvance \@tempdima -\ht \@marbox 
+                                                  \global \setbox \@marbox \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...marbox \global \setbox \@marbox 
+                                                  \vbox {\vskip \@tempdima \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ...\vskip \@tempdima \box \@marbox 
+                                                  }\global \ht \@marbox \z@ ...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Undefined control sequence.
+\@addmarginpar ... \@marbox }\global \ht \@marbox 
+                                                  \z@ \global \dp \@marbox \...
+l.36     \end{table}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex:36: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.36     \end{table}
+                    
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Chapters/Tables/Results/RQ_Inflationrate_tradeoff_r2_t1.tex
