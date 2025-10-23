@@ -313,7 +313,7 @@ def get_min_euclidian_distance(results):
             scaler = MinMaxScaler()
             scaled_values = scaler.fit_transform(subset[['test.rmse', 'nodes_count']])
             subset.loc[:, ['test.rmse', 'nodes_count']] = scaled_values
-            subset['euclidian_distance'] = (subset['test.rmse']**2 + 2*subset['nodes_count']**2)**0.5# 2*
+            subset['euclidian_distance'] = (1*subset['test.rmse']**2 + 1*subset['nodes_count']**2)**0.5# 2*
 
             subset = subset.sort_values('euclidian_distance')
             subset = subset.drop_duplicates(subset=['dataset', 'algorithm'], keep='first')
